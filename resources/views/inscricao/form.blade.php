@@ -62,7 +62,7 @@
             @csrf
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome Ele:</label>
+                    <label class="form-label fw-bold">Nome completo ele:</label>
                     <input type="text" name="nome_ele" class="form-control" value="{{ old('nome_ele') }}">
                 </div>
                 <div class="col-md-6 mb-3">
@@ -73,7 +73,7 @@
 
             <div class="row">
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome Ela:</label>
+                    <label class="form-label fw-bold">Nome completo ela:</label>
                     <input type="text" name="nome_ela" class="form-control" value="{{ old('nome_ela') }}" required>
                 </div>
                 <div class="col-md-6 mb-3">
