@@ -96,7 +96,7 @@
                     </span>
                 </p>
 
-                @if ($inscricao->status_pagamento == 'pendente')
+                @if ($inscricao->status_pagamento->value == 'Pendente')
                     <p>
                         <a href="https://wa.me/5588982121807" target="_blank" class="btn-whatsapp shadow-lg">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" width="25">
@@ -107,7 +107,7 @@
             </div>
         </div>
 
-        @if ($inscricao->status_pagamento == 'pendente')
+        @if ($inscricao->status_pagamento->value == 'Pendente')
             <div class="card shadow-lg border-0 p-4 bg-white text-center">
                 <h2 class="fw-bold text-danger">💳 Fazer Pagamento</h2>
                 <h5 class="text-secondary">Recebedor: <br><span class="fw-bold">ARTRS SERVIÇOS - R DE SOUZA SERVIÇOS LTDA</span></h5>

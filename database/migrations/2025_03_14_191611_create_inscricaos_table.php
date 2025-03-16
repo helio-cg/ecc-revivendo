@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
+use App\Core\Enums\InvoiceStatus;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 return new class extends Migration
 {
@@ -19,7 +20,7 @@ return new class extends Migration
             $table->string('nome_usual_ela');
             $table->string('telefone')->unique();
             $table->date('paymentDate')->nullable();
-            $table->enum('status_pagamento', ['pendente', 'pago'])->default('pendente');
+            $table->enum('status_pagamento', array_column(InvoiceStatus::cases(),'value'))->default('Pendente');
             $table->foreignId('paroquia_id')->constrained();
             $table->timestamps();
         });

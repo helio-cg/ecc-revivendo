@@ -11,8 +11,8 @@ class StatsOverview extends BaseWidget
     protected function getStats(): array
     {
         $totalInscritos = Inscricao::count();
-        $totalInscritosPago = Inscricao::where('status_pagamento', 'pago')->count();
-        $totalInscritosPendente = Inscricao::where('status_pagamento', 'pendente')->count();
+        $totalInscritosPago = Inscricao::where('status_pagamento', 'Pago')->count();
+        $totalInscritosPendente = Inscricao::where('status_pagamento', 'Pendente')->count();
 
         return [
             Stat::make('Inscrições', $totalInscritos . ' inscritos')
