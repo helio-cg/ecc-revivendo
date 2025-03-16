@@ -17,6 +17,7 @@ class Inscricao extends Model
         'nome_usual_ele',
         'nome_usual_ela',
         'telefone',
+        'paymentDate',
         'status_pagamento',
         'paroquia_id'
     ];

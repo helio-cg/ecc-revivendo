@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('nome_usual_ele');
             $table->string('nome_usual_ela');
             $table->string('telefone')->unique();
+            $table->date('paymentDate')->nullable();
             $table->enum('status_pagamento', ['pendente', 'pago'])->default('pendente');
             $table->foreignId('paroquia_id')->constrained();
             $table->timestamps();
