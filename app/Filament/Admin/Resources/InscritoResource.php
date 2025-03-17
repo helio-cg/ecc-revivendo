@@ -27,6 +27,8 @@ class InscritoResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-users';
 
+    protected static ?string $navigationGroup = 'Incrição';
+
     protected static ?string $navigationLabel = 'Incrições';
 
     public static function form(Form $form): Form
