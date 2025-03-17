@@ -53,17 +53,18 @@ class InscritoResource extends Resource
             ->columns([
                 TextColumn::make('nome_usual_ela')
                     ->label('Nome do casal')
-                    ->searchable()
+                    ->searchable(['nome_usual_ele','nome_usual_ela'])
                     ->formatStateUsing(fn (Model $record): string => $record->nome_usual_ele . ' & ' . $record->nome_usual_ela),
                 TextColumn::make('nome_ele')
                     ->label('Nome completo')
-                    ->searchable()
+                    ->searchable(['nome_ele','nome_ela'])
                     ->formatStateUsing(fn ($record) => "{$record->nome_ele}<br>{$record->nome_ela}")
                     ->html(),
                 TextColumn::make('telefone')
                     ->formatStateUsing(fn ($state) => preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $state)),
                 TextColumn::make('status_pagamento')
                     ->label('Status do Pagamento')
+                    ->sortable()
                     ->badge()
                     ->color(fn ($record) => match ($record->status_pagamento) {
                         'Pago' => 'success',  // Verde
@@ -87,7 +88,8 @@ class InscritoResource extends Resource
                     ->button()
                     ->color('success')
                     ->requiresConfirmation()
-                    ->modalHeading(fn ($record) => "Confirmar Pagamento de {$record->nome_ele} & {$record->nome_ela}?")
+                    ->modalHeading("Confirmar Pagamento?")
+                    ->modalDescription(fn ($record) => "{$record->nome_ele} & {$record->nome_ela} - {$record->paroquia->name} de {$record->paroquia->city}")
                     ->action(fn ($record) => $record->update([
                         'paymentDate' => Carbon::now(),
                         'status_pagamento' => 'Pago',
