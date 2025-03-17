@@ -6,9 +6,11 @@ use App\Filament\Admin\Resources\UserResource\Pages;
 use App\Filament\Admin\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -27,7 +29,17 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                //
+                TextInput::make('name')
+                    ->label('Nome'),
+                TextInput::make('email')
+                    ->label('E-Mail'),
+                TextInput::make('password')
+                    ->label('Senha')
+                    ->password()
+                    ->required(fn (string $context): bool => $context === 'create')
+                    ->hidden(fn (string $context): bool => $context === 'edit')
+                    ->revealable()
+                    ->required(),
             ]);
     }
 
@@ -35,7 +47,12 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('name')
+                    ->label('Nome'),
+                TextColumn::make('email')
+                    ->label('E-Mail'),
+                TextColumn::make('created_at')
+                    ->label('Registrado em'),
             ])
             ->filters([
                 //
