@@ -37,14 +37,14 @@ class StatsInscritos extends ChartWidget
 
                     'label' => 'Inscrições realizadas',
                     'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
-                    'borderColor' => '#0C2A61FF',
-                    'backgroundColor' => '#1C5AB8FF',
+                    'borderColor' => '#0F3E96FF',
+                    'backgroundColor' => '#6A95D4FF',
                 ],
                 [
                     'label' => 'Inscrições confirmadas',
                     'data' => $data2->map(fn (TrendValue $value) => $value->aggregate),
                     'borderColor' => '#4D7941',
-                    'backgroundColor' => '#7CA772',
+                    'backgroundColor' => '#B7D4B1FF',
                 ],
             ],
             'labels' => $data->map(fn (TrendValue $value) => $value->date),
