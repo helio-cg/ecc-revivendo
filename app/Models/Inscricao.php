@@ -16,6 +16,8 @@ class Inscricao extends Model
         'nome_ela',
         'nome_usual_ele',
         'nome_usual_ela',
+        'tamanho_camisa_ele',
+        'tamanho_camisa_ela',
         'telefone',
         'paymentDate',
         'status_pagamento',

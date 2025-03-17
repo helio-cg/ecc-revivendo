@@ -8,7 +8,7 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            background: linear-gradient(135deg, #6610f2, #e3f2fd);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -17,7 +17,7 @@
         .card {
             border: none;
             border-radius: 12px;
-            max-width: 600px;
+            max-width: 700px;
             width: 100%;
         }
         .btn-custom {
@@ -40,8 +40,8 @@
 <body>
 
     <div class="card p-4 shadow-lg">
-        <h2 class="text-center text-primary fw-bold">Inscrição no Evento</h2>
-
+        <h2 class="text-center text-primary fw-bold">Inscrição para XXII Revivendo - ECC</h2>
+        <hr>
         @if(session('success'))
             <div class="alert alert-success text-center">
                 {{ session('success') }}
@@ -60,29 +60,57 @@
 
         <form action="{{ route('inscricao.store') }}" method="POST">
             @csrf
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome completo ele:</label>
+
+            <h5 class="text-primary fw-bold">Dados ELE</h5>
+            <div class="row rounded-3 mb-3">
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-bold">Nome completo:</label>
                     <input type="text" name="nome_ele" class="form-control" value="{{ old('nome_ele') }}">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome Usual Ele:</label>
+                    <label class="form-label fw-bold">Nome usual (apelido):</label>
                     <input type="text" name="nome_usual_ele" class="form-control" value="{{ old('nome_usual_ele') }}">
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Tamanho da camisa:</label>
+                    <select class="form-select" name="tamanho_camisa_ele" aria-label="Tamanho da camisa" value="{{ old('tamanho_camisa_ele') }}">
+                        <option selected value="">Selecione um opção</option>
+                        <option value="PP">PP</option>
+                        <option value="P">P</option>
+                        <option value="M">M</option>
+                        <option value="G">G</option>
+                        <option value="GG">GG</option>
+                        <option value="EXG">EXG</option>
+                      </select>
+                </div>
             </div>
 
-            <div class="row">
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome completo ela:</label>
-                    <input type="text" name="nome_ela" class="form-control" value="{{ old('nome_ela') }}" required>
+            <h5 class="text-danger fw-bold">Dados ELA</h5>
+            <div class="row rounded-3">
+                <div class="col-md-12 mb-3">
+                    <label class="form-label fw-bold">Nome completo:</label>
+                    <input type="text" name="nome_ela" class="form-control" value="{{ old('nome_ela') }}">
                 </div>
                 <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome Usual Ela:</label>
+                    <label class="form-label fw-bold">Nome usual (apelido):</label>
                     <input type="text" name="nome_usual_ela" class="form-control" value="{{ old('nome_usual_ela') }}">
                 </div>
+                <div class="col-md-6 mb-3">
+                    <label class="form-label fw-bold">Tamanho da camisa:</label>
+                    <select class="form-select" name="tamanho_camisa_ela" aria-label="Tamanho da camisa" value="{{ old('tamanho_camisa_ela') }}">
+                        <option selected value="">Selecione um opção</option>
+                        <option value="PP">PP</option>
+                        <option value="P">P</option>
+                        <option value="M">M</option>
+                        <option value="G">G</option>
+                        <option value="GG">GG</option>
+                        <option value="EXG">EXG</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="mb-3">
+
+            <div class="mb-3 mt-3">
                 <label class="form-label fw-bold">Telefone com DDD: <span class="text-danger">(Somente números)</span></label>
                 <input type="number" name="telefone" class="form-control" value="{{ old('telefone') }}" required>
             </div>
@@ -97,7 +125,7 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-custom btn-lg w-100">📩 Enviar Inscrição</button>
+            <button type="submit" class="btn btn-custom btn-lg w-100 mt-3">📩 Enviar Inscrição</button>
         </form>
     </div>
 

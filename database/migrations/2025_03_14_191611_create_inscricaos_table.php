@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nome_ela');
             $table->string('nome_usual_ele');
             $table->string('nome_usual_ela');
+            $table->string('tamanho_camisa_ele');
+            $table->string('tamanho_camisa_ela');
             $table->string('telefone')->unique();
             $table->date('paymentDate')->nullable();
             $table->enum('status_pagamento', array_column(InvoiceStatus::cases(),'value'))->default('Pendente');

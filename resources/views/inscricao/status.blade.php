@@ -9,7 +9,7 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            background: linear-gradient(135deg, #6610f2, #e3f2fd);
             min-height: 100vh;
             font-family: 'Arial', sans-serif;
         }
@@ -89,14 +89,15 @@
                 <p><strong class="text-primary">📍 Paróquia:</strong> {{ $inscricao->paroquia->name }} - {{ $inscricao->paroquia->city }}</p>
                 <p><strong class="text-primary">👤 Nome completo:</strong><br> {{ $inscricao->nome_ele }} <br> {{ $inscricao->nome_ela }}</p>
                 <p><strong class="text-primary">📞 Telefone:</strong> {{ '(' . substr($inscricao->telefone, 0, 2) . ') ' . substr($inscricao->telefone, 2, 5) . '-' . substr($inscricao->telefone, 7) }}</p>
+                <p><strong class="text-primary">👕 Camisas:</strong><br> 👨‍🦱 {{ $inscricao->tamanho_camisa_ele }} e 👩‍🦰 {{ $inscricao->tamanho_camisa_ela }}</p>
 
-                <p><strong class="text-primary">💰 Status de Pagamento:</strong>
+                <p><strong class="text-primary">💰 Status de Pagamento:</strong><br>
                     <span class="status-badge badge bg-{{ $inscricao->status_pagamento == 'pago' ? 'success' : 'warning' }}">
                         {{ ucfirst($inscricao->status_pagamento) }}
                     </span>
                 </p>
 
-                @if ($inscricao->status_pagamento->value == 'Pendente')
+                @if ($inscricao->status_pagamento == 'Pendente')
                     <p>
                         <a href="https://wa.me/5588982121807" target="_blank" class="btn-whatsapp shadow-lg">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" width="25">
@@ -107,7 +108,7 @@
             </div>
         </div>
 
-        @if ($inscricao->status_pagamento->value == 'Pendente')
+        @if ($inscricao->status_pagamento == 'Pendente')
             <div class="card shadow-lg border-0 p-4 bg-white text-center">
                 <h2 class="fw-bold text-danger">💳 Fazer Pagamento</h2>
                 <h5 class="text-secondary">Recebedor: <br><span class="fw-bold">ARTRS SERVIÇOS - R DE SOUZA SERVIÇOS LTDA</span></h5>

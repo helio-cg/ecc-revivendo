@@ -17,8 +17,6 @@ class InscricaoController extends Controller
 
     public function store(CasalRequest $request)
     {
-
-
         $inscricao = Inscricao::create($request->validated());
 
         return redirect()->route('inscricao.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');

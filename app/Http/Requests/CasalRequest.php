@@ -16,6 +16,8 @@ class CasalRequest extends FormRequest
             'nome_ela' => 'required|string|max:255',
             'nome_usual_ele' => 'required|string|max:255',
             'nome_usual_ela' => 'required|string|max:255',
+            'tamanho_camisa_ele' => 'required|string|max:255',
+            'tamanho_camisa_ela' => 'required|string|max:255',
             'telefone' => [
                 'required',
                 'string',
@@ -32,6 +34,8 @@ class CasalRequest extends FormRequest
             'nome_ela.required' => 'O nome completo dela é obrigatório.',
             'nome_usual_ele.required' => 'O nome usual dele é obrigatório.',
             'nome_usual_ela.required' => 'O nome usual dela é obrigatório.',
+            'tamanho_camisa_ele.required' => 'O tamanho da camisa dele é obrigatório.',
+            'tamanho_camisa_ela.required' => 'O tamanho da camisa dela é obrigatório.',
             'telefone.required' => 'O telefone é obrigatório.',
             'telefone.unique' => 'Este telefone já está cadastrado.',
             'telefone.digits' => 'O telefone com o DDD deve conter exatamente 11 dígitos numéricos.',

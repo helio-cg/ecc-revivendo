@@ -8,7 +8,7 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #f8f9fa, #e3f2fd);
+            background: linear-gradient(135deg, #6610f2, #e3f2fd);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -17,7 +17,7 @@
             font-family: 'Arial', sans-serif;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             background: white;
             padding: 30px;
             border-radius: 12px;
@@ -62,8 +62,8 @@
 <body>
 
     <div class="container text-center">
-        <h1 class="text-primary fw-bold">Revivendo - ECC</h1>
-        <p class="text-muted">Bem-vindo ao portal do Encontro de Casais com Cristo.</p>
+        <h1 class="text-primary fw-bold">XXII Revivendo - ECC</h1>
+        <p class="text-muted">Nosso encontro será realizado domingo no dia 03 de agosto de 2025 na cidade de Iguatu-CE</p>
 
         <a href="/inscricao" class="btn btn-primary">🚀 Fazer Inscrição</a>
         <a href="/consultar-inscricao" class="btn btn-secondary">🔍 Consultar Inscrição</a>
