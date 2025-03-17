@@ -25,11 +25,14 @@ class InscritoResource extends Resource
 {
     protected static ?string $model = Inscricao::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationIcon = 'heroicon-o-ticket';
 
-    protected static ?string $navigationGroup = 'Incrição';
+    protected static ?string $navigationGroup = 'Inscrição';
 
-    protected static ?string $navigationLabel = 'Incrições';
+    protected static ?string $navigationLabel = 'Inscrições';
+
+    protected static ?string $modelLabel = 'inscrição';
+    protected static ?string $pluralModelLabel = 'inscrições';
 
     public static function form(Form $form): Form
     {

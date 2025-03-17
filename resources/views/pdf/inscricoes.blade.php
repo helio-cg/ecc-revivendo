@@ -7,7 +7,7 @@
         /* Estilos gerais */
         body {
             font-family: 'Segoe UI', Arial, sans-serif;
-            margin: 20px;
+            margin: 4px;
             line-height: 1.6;
             color: #333;
         }
@@ -46,9 +46,9 @@
         }
 
         td {
-            padding: 12px 15px;
+            padding: 2px 4px;
             border-bottom: 1px solid #eee;
-            vertical-align: top;
+            vertical-align: middle;
         }
 
         tr:nth-child(even) {
@@ -63,7 +63,7 @@
         /* Estilização específica */
         .couple-name {
             display: block;
-            margin: 4px 0;
+            margin: 2px 0;
         }
 
         .usual-name {
@@ -78,6 +78,15 @@
             background: #e9ecef;
             border-radius: 4px;
         }
+
+        tr:nth-child(even) { /* Linhas pares */
+            background-color: #f8f9fa; /* Cinza claro */
+        }
+
+        tr:nth-child(odd) { /* Linhas ímpares */
+            background-color: #ffffff; /* Branco */
+        }
+
     </style>
 </head>
 <body>
@@ -96,11 +105,11 @@
             @foreach ($inscricoes as $inscricao)
                 <tr>
                     <td>
-                        <span class="couple-name">{{ $inscricao->nome_ele }} <span class="usual-name">({{ $inscricao->nome_usual_ele }})</span></span>
-                        <span class="couple-name">{{ $inscricao->nome_ela }} <span class="usual-name">({{ $inscricao->nome_usual_ela }})</span></span>
+                        <span class="couple-name">{{ $inscricao->nome_ele }} <span class="usual-name">(<b>{{ $inscricao->nome_usual_ele }}</b>)</span></span>
+                        <span class="couple-name">{{ $inscricao->nome_ela }} <span class="usual-name">(<b>{{ $inscricao->nome_usual_ela }}</b>)</span></span>
                     </td>
-                    <td>{{ $inscricao->telefone }}</td>
-                    <td>
+                    <td style="padding-top: 4px;">{{ preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $inscricao->telefone) }}</td>
+                    <td style="padding-top: 4px;">
                         <span class="shirt-size">Ele {{ $inscricao->tamanho_camisa_ele }}</span>
                         <span class="shirt-size">Ela {{ $inscricao->tamanho_camisa_ela }}</span>
                     </td>

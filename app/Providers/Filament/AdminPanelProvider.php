@@ -6,8 +6,10 @@ use Filament\Pages;
 use Filament\Panel;
 use Filament\Widgets;
 use Filament\PanelProvider;
+use Filament\Enums\ThemeMode;
 use App\Filament\Admin\Auth\Login;
 use Filament\Support\Colors\Color;
+use Filament\Support\Enums\MaxWidth;
 use App\Filament\Admin\Pages\Dashboard;
 use Filament\Http\Middleware\Authenticate;
 use Illuminate\Session\Middleware\StartSession;
@@ -30,9 +32,15 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
+            ->profile()
             ->colors([
                 'primary' => Color::Indigo,
             ])
+            ->maxContentWidth(MaxWidth::Full)
+            ->defaultThemeMode(ThemeMode::Light)
+            ->darkMode(false)
+            //->brandLogo(asset('img/logo.png'))
+            //->brandLogoHeight('12rem')
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
