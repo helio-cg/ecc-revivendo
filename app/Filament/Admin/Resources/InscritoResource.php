@@ -46,11 +46,13 @@ class InscritoResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('nome_usual_ele')
+                TextColumn::make('nome_usual_ela')
                     ->label('Nome do casal')
+                    ->searchable()
                     ->formatStateUsing(fn (Model $record): string => $record->nome_usual_ele . ' & ' . $record->nome_usual_ela),
                 TextColumn::make('nome_ele')
                     ->label('Nome completo')
+                    ->searchable()
                     ->formatStateUsing(fn ($record) => "{$record->nome_ele}<br>{$record->nome_ela}")
                     ->html(),
                 TextColumn::make('telefone')
