@@ -9,7 +9,7 @@
 
     <style>
         body {
-            background: linear-gradient(135deg, #6610f2, #e3f2fd);
+            background: linear-gradient(135deg, #D2CCE6FF, #e3f2fd);
             min-height: 100vh;
             font-family: 'Arial', sans-serif;
         }
