@@ -14,11 +14,24 @@
             justify-content: center;
             align-items: center;
         }
-        .card {
-            border: none;
-            border-radius: 12px;
-            max-width: 700px;
+        .container {
+            max-width: 900px;
             width: 100%;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .row {
+            display: flex;
+            align-items: center;
+        }
+        .image-section {
+            background: url('https://via.placeholder.com/450') no-repeat center center/cover;
+            min-height: 100%;
+        }
+        .form-section {
+            padding: 30px;
         }
         .btn-custom {
             background: linear-gradient(135deg, #007bff, #6610f2);
@@ -39,95 +52,107 @@
 </head>
 <body>
 
-    <div class="card p-4 shadow-lg">
-        <h2 class="text-center text-primary fw-bold">Inscrição para XXII Revivendo - ECC</h2>
-        <hr>
-        @if(session('success'))
-            <div class="alert alert-success text-center">
-                {{ session('success') }}
-            </div>
-        @endif
+<div class="container">
+    <div class="row">
+        <!-- Lado esquerdo - Imagem -->
+        <div class="col-md-5 d-none d-md-block image-section">
+            MODELO DA CAMISA AQUI
+        </div>
 
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul class="error-list">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+        <!-- Lado direito - Formulário -->
+        <div class="col-md-7 form-section">
+            <h2 class="text-center text-primary fw-bold">Inscrição para XXII Revivendo - ECC</h2>
+            <hr>
 
-        <form action="{{ route('inscricao.store') }}" method="POST">
-            @csrf
+            @if(session('success'))
+                <div class="alert alert-success text-center">
+                    {{ session('success') }}
+                </div>
+            @endif
 
-            <h5 class="text-primary fw-bold">Dados ELE</h5>
-            <div class="row rounded-3 mb-3">
-                <div class="col-md-12 mb-3">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul class="error-list">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('inscricao.store') }}" method="POST">
+                @csrf
+
+                <h5 class="text-primary fw-bold">Dados ELE</h5>
+                <div class="mb-3">
                     <label class="form-label fw-bold">Nome completo:</label>
                     <input type="text" name="nome_ele" class="form-control" value="{{ old('nome_ele') }}">
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome usual (apelido):</label>
-                    <input type="text" name="nome_usual_ele" class="form-control" value="{{ old('nome_usual_ele') }}">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Nome usual (apelido):</label>
+                        <input type="text" name="nome_usual_ele" class="form-control" value="{{ old('nome_usual_ele') }}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Tamanho da camisa:</label>
+                        <select class="form-select" name="tamanho_camisa_ele" value="{{ old('tamanho_camisa_ele') }}">
+                            <option selected value="">Selecione um opção</option>
+                            <option value="PP">PP</option>
+                            <option value="P">P</option>
+                            <option value="M">M</option>
+                            <option value="G">G</option>
+                            <option value="GG">GG</option>
+                            <option value="EXG">EXG</option>
+                            <option value="EXGG">EXGG</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Tamanho da camisa:</label>
-                    <select class="form-select" name="tamanho_camisa_ele" aria-label="Tamanho da camisa" value="{{ old('tamanho_camisa_ele') }}">
-                        <option selected value="">Selecione um opção</option>
-                        <option value="PP">PP</option>
-                        <option value="P">P</option>
-                        <option value="M">M</option>
-                        <option value="G">G</option>
-                        <option value="GG">GG</option>
-                        <option value="EXG">EXG</option>
-                      </select>
-                </div>
-            </div>
 
-            <h5 class="text-danger fw-bold">Dados ELA</h5>
-            <div class="row rounded-3">
-                <div class="col-md-12 mb-3">
+                <h5 class="text-danger fw-bold">Dados ELA</h5>
+                <div class="mb-3">
                     <label class="form-label fw-bold">Nome completo:</label>
                     <input type="text" name="nome_ela" class="form-control" value="{{ old('nome_ela') }}">
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Nome usual (apelido):</label>
-                    <input type="text" name="nome_usual_ela" class="form-control" value="{{ old('nome_usual_ela') }}">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Nome usual (apelido):</label>
+                        <input type="text" name="nome_usual_ela" class="form-control" value="{{ old('nome_usual_ela') }}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Tamanho da camisa:</label>
+                        <select class="form-select" name="tamanho_camisa_ela" value="{{ old('tamanho_camisa_ela') }}">
+                            <option selected value="">Selecione um opção</option>
+                            <option value="PP">PP</option>
+                            <option value="P">P</option>
+                            <option value="M">M</option>
+                            <option value="G">G</option>
+                            <option value="GG">GG</option>
+                            <option value="EXG">EXG</option>
+                            <option value="EXGG">EXGG</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="col-md-6 mb-3">
-                    <label class="form-label fw-bold">Tamanho da camisa:</label>
-                    <select class="form-select" name="tamanho_camisa_ela" aria-label="Tamanho da camisa" value="{{ old('tamanho_camisa_ela') }}">
-                        <option selected value="">Selecione um opção</option>
-                        <option value="PP">PP</option>
-                        <option value="P">P</option>
-                        <option value="M">M</option>
-                        <option value="G">G</option>
-                        <option value="GG">GG</option>
-                        <option value="EXG">EXG</option>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Telefone com DDD: <span class="text-danger">(Somente números)</span></label>
+                    <input type="number" name="telefone" class="form-control" value="{{ old('telefone') }}" required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label fw-bold">Paróquia:</label>
+                    <select class="form-control" name="paroquia_id">
+                        <option value="">Selecione uma paróquia</option>
+                        @foreach ($paroquias as $paroquia)
+                            <option value="{{ $paroquia->id }}">{{ $paroquia->name }} - {{ $paroquia->city }} </option>
+                        @endforeach
                     </select>
                 </div>
-            </div>
 
-
-            <div class="mb-3 mt-3">
-                <label class="form-label fw-bold">Telefone com DDD: <span class="text-danger">(Somente números)</span></label>
-                <input type="number" name="telefone" class="form-control" value="{{ old('telefone') }}" required>
-            </div>
-
-            <div class="mb-3">
-                <label class="form-label fw-bold">Paróquia:</label>
-                <select class="form-control" name="paroquia_id">
-                    <option value="">Selecione uma paróquia</option>
-                    @foreach ($paroquias as $paroquia)
-                        <option value="{{ $paroquia->id }}">{{ $paroquia->name }} - {{ $paroquia->city }} </option>
-                    @endforeach
-                </select>
-            </div>
-
-            <button type="submit" class="btn btn-custom btn-lg w-100 mt-3">📩 Enviar Inscrição</button>
-        </form>
+                <button type="submit" class="btn btn-custom btn-lg w-100 mt-3">📩 Enviar Inscrição</button>
+            </form>
+        </div>
     </div>
+</div>
 
 </body>
 </html>
