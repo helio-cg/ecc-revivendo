@@ -97,15 +97,15 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-bold">Tamanho da camisa:</label>
-                        <select class="form-select" name="tamanho_camisa_ele" value="{{ old('tamanho_camisa_ele') }}">
-                            <option selected value="">Selecione um opção</option>
-                            <option value="PP">PP</option>
-                            <option value="P">P</option>
-                            <option value="M">M</option>
-                            <option value="G">G</option>
-                            <option value="GG">GG</option>
-                            <option value="EXG">EXG</option>
-                            <option value="EXGG">EXGG</option>
+                        <select class="form-select" name="tamanho_camisa_ele">
+                            <option value="">Selecione um opção</option>
+                            <option value="PP" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'PP' ? 'selected' : '' }}>PP</option>
+                            <option value="P" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'P' ? 'selected' : '' }}>P</option>
+                            <option value="M" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'M' ? 'selected' : '' }}>M</option>
+                            <option value="G" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'G' ? 'selected' : '' }}>G</option>
+                            <option value="GG" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'GG' ? 'selected' : '' }}>GG</option>
+                            <option value="EXG" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'EXG' ? 'selected' : '' }}>EXG</option>
+                            <option value="EXGG" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'EXGG' ? 'selected' : '' }}>EXGG</option>
                         </select>
                     </div>
                 </div>
@@ -122,15 +122,15 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label fw-bold">Tamanho da camisa:</label>
-                        <select class="form-select" name="tamanho_camisa_ela" value="{{ old('tamanho_camisa_ela') }}">
-                            <option selected value="">Selecione um opção</option>
-                            <option value="PP">PP</option>
-                            <option value="P">P</option>
-                            <option value="M">M</option>
-                            <option value="G">G</option>
-                            <option value="GG">GG</option>
-                            <option value="EXG">EXG</option>
-                            <option value="EXGG">EXGG</option>
+                        <select class="form-select" name="tamanho_camisa_ela">
+                            <option value="">Selecione um opção</option>
+                            <option value="PP" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'PP' ? 'selected' : '' }}>PP</option>
+                            <option value="P" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'P' ? 'selected' : '' }}>P</option>
+                            <option value="M" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'M' ? 'selected' : '' }}>M</option>
+                            <option value="G" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'G' ? 'selected' : '' }}>G</option>
+                            <option value="GG" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'GG' ? 'selected' : '' }}>GG</option>
+                            <option value="EXG" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'EXG' ? 'selected' : '' }}>EXG</option>
+                            <option value="EXGG" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'EXGG' ? 'selected' : '' }}>EXGG</option>
                         </select>
                     </div>
                 </div>
@@ -145,7 +145,7 @@
                     <select class="form-control" name="paroquia_id">
                         <option value="">Selecione uma paróquia</option>
                         @foreach ($paroquias as $paroquia)
-                            <option value="{{ $paroquia->id }}">{{ $paroquia->name }} - {{ $paroquia->city }} </option>
+                            <option value="{{ $paroquia->id }}" {{ old('paroquia_id', $paroquia_id ?? '') == $paroquia->id ? 'selected' : '' }}>{{ $paroquia->name }} - {{ $paroquia->city }} </option>
                         @endforeach
                     </select>
                 </div>
