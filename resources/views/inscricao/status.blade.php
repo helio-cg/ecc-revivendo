@@ -89,7 +89,7 @@
                 <p><strong class="text-primary">📍 Paróquia:</strong> {{ $inscricao->paroquia->name }} - {{ $inscricao->paroquia->city }}</p>
                 <p><strong class="text-primary">👤 Nome completo:</strong><br> {{ $inscricao->nome_ele }} <br> {{ $inscricao->nome_ela }}</p>
                 <p><strong class="text-primary">📞 Telefone:</strong> {{ '(' . substr($inscricao->telefone, 0, 2) . ') ' . substr($inscricao->telefone, 2, 5) . '-' . substr($inscricao->telefone, 7) }}</p>
-                <p><strong class="text-primary">👕 Camisas:</strong><br> 👨‍🦱 {{ $inscricao->tamanho_camisa_ele }} e 👩‍🦰 {{ $inscricao->tamanho_camisa_ela }}</p>
+                <p><strong class="text-primary">👕 Camisas:</strong><br> 👨‍🦱 {{ $inscricao->tamanho_camisa_ele }} 👩‍🦰 {{ $inscricao->tamanho_camisa_ela }}</p>
 
                 <p><strong class="text-primary">💰 Status de Pagamento:</strong><br>
                     <span class="status-badge badge bg-{{ $inscricao->status_pagamento == 'pago' ? 'success' : 'warning' }}">

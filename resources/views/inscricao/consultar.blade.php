@@ -36,8 +36,10 @@
 <body>
 
     <div class="card p-4 shadow-lg">
+        <img src="/img/logo.png">
+        <br>
         <h2 class="text-center text-primary fw-bold">Consultar Inscrição</h2>
-
+        <br>
         @if(session('error'))
             <div class="alert alert-danger text-center">
                 {{ session('error') }}

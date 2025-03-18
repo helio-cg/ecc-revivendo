@@ -57,17 +57,55 @@
             background: linear-gradient(135deg, #6610f2, #007bff);
             transform: scale(1.05);
         }
+        #countdown {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #6610f2;
+        }
     </style>
 </head>
 <body>
 
     <div class="container text-center">
+        <img src="/img/logo.png">
         <h1 class="text-primary fw-bold">XXII Revivendo - ECC</h1>
-        <p class="text-muted">Nosso encontro será realizado domingo no dia 03 de agosto de 2025 na cidade de Iguatu-CE</p>
-
+        <br>
+        <p class="text-muted">Nosso encontro será realizado domingo<br>03 de agosto de 2025 na cidade de Iguatu-CE</p>
+        <br>
         <a href="/inscricao" class="btn btn-primary">🚀 Fazer Inscrição</a>
+        <br>
         <a href="/consultar-inscricao" class="btn btn-secondary">🔍 Consultar Inscrição</a>
+        <br>
+        <p>O evento começa em:</p>
+        <div id="countdown">00d 00h 00m 00s</div>
     </div>
 
+
+
+    <script>
+        // Defina a data do evento (AAAA, MM, DD, HH, MM, SS)
+        const eventDate = new Date("2025-08-03T08:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const timeLeft = eventDate - now;
+
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            } else {
+                document.getElementById("countdown").style.display = "none";
+                document.querySelector(".event-message").style.display = "block";
+                clearInterval(interval);
+            }
+        }
+
+        updateCountdown(); // Atualiza imediatamente ao carregar a página
+        const interval = setInterval(updateCountdown, 1000);
+    </script>
 </body>
 </html>
