@@ -2,7 +2,6 @@
 
 namespace App\Filament\Admin\Resources;
 
-use App\Enums\InvoiceStatus;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Tables;
@@ -10,16 +9,19 @@ use App\Models\Inscrito;
 use Filament\Forms\Form;
 use App\Models\Inscricao;
 use Filament\Tables\Table;
+use App\Enums\InvoiceStatus;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
+use Filament\Forms\Components\TextInput;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Admin\Resources\InscritoResource\Pages;
 use App\Filament\Admin\Resources\InscritoResource\RelationManagers;
-use Filament\Forms\Components\Select;
-use Filament\Forms\Components\TextInput;
+use App\Models\Paroquia;
 
 class InscritoResource extends Resource
 {
@@ -50,18 +52,19 @@ class InscritoResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->query(Inscricao::query()->orderBy('id','desc'))
             ->columns([
-                TextColumn::make('nome_usual_ela')
-                    ->label('Nome do casal')
-                    ->searchable(['nome_usual_ele','nome_usual_ela'])
-                    ->formatStateUsing(fn (Model $record): string => $record->nome_usual_ele . ' & ' . $record->nome_usual_ela),
+                TextColumn::make('id'),
                 TextColumn::make('nome_ele')
                     ->label('Nome completo')
-                    ->searchable(['nome_ele','nome_ela'])
-                    ->formatStateUsing(fn ($record) => "{$record->nome_ele}<br>{$record->nome_ela}")
+                    ->searchable(['nome_ele','nome_ela','nome_usual_ele','nome_usual_ela'])
+                    ->formatStateUsing(fn ($record) => "{$record->nome_ele} ($record->nome_usual_ele)<br>{$record->nome_ela} ($record->nome_usual_ela)")
                     ->html(),
                 TextColumn::make('telefone')
                     ->formatStateUsing(fn ($state) => preg_replace('/(\d{2})(\d{5})(\d{4})/', '($1) $2-$3', $state)),
+                TextColumn::make('paroquia.name')
+                    ->label('Paróquia')
+                    ->formatStateUsing(fn ($record) => "{$record->paroquia->name} - {$record->paroquia->city}"),
                 TextColumn::make('status_pagamento')
                     ->label('Status do Pagamento')
                     ->sortable()
@@ -73,12 +76,20 @@ class InscritoResource extends Resource
                         default => 'secondary', // Cinza para outros casos
                     }),
                 TextColumn::make('paymentDate')
-                    ->label('Pago em'),
+                    ->label('Pago em')
+                    ->date('d/m/Y'),
                 TextColumn::make('created_at')
                     ->label('Inscrito em')
+                    ->date('d/m/Y h:m:i')
             ])
             ->filters([
-                //
+                SelectFilter::make('status')
+                    ->label('Filtrar por Paróquia')
+                    ->searchable()
+                    ->preload()
+                    ->relationship('paroquia', 'name', function ($query) {
+                        $query->selectRaw("id, CONCAT(name, ' - ', city) as name");
+                    }),
             ])
             ->actions([
 

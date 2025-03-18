@@ -11,10 +11,13 @@ use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\Pages\ListRecords;
 use App\Filament\Admin\Resources\InscritoResource;
+use App\Traits\HasTableInscricaoTab;
 
 class ListInscritos extends ListRecords
 {
     protected static string $resource = InscritoResource::class;
+
+    use HasTableInscricaoTab;
 
     protected function getHeaderActions(): array
     {
@@ -22,6 +25,7 @@ class ListInscritos extends ListRecords
             //Actions\CreateAction::make(),
             Action::make('Gerar PDF')
                 ->label('Gerar PDF')
+                ->icon('heroicon-o-check-circle')
                 ->color('success')
                 ->form([
                     Select::make('paroquia_id')
