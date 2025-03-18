@@ -86,7 +86,7 @@
                 <h3 class="fw-bold text-secondary">{{ $inscricao->nome_usual_ele }} & {{ $inscricao->nome_usual_ela }}</h3>
                 <hr class="my-3">
 
-                <p><strong class="text-primary">📍 Paróquia:</strong> {{ $inscricao->paroquia->name }} - {{ $inscricao->paroquia->city }}</p>
+                <p><strong class="text-primary">⛪ {{ $inscricao->paroquia->name }} - {{ $inscricao->paroquia->city }}</strong></p>
                 <p><strong class="text-primary">👤 Nome completo:</strong><br> {{ $inscricao->nome_ele }} <br> {{ $inscricao->nome_ela }}</p>
                 <p><strong class="text-primary">📞 Telefone:</strong> {{ '(' . substr($inscricao->telefone, 0, 2) . ') ' . substr($inscricao->telefone, 2, 5) . '-' . substr($inscricao->telefone, 7) }}</p>
                 <p><strong class="text-primary">👕 Camisas:</strong><br> 👨‍🦱 {{ $inscricao->tamanho_camisa_ele }} 👩‍🦰 {{ $inscricao->tamanho_camisa_ela }}</p>
@@ -114,7 +114,7 @@
                 <h5 class="text-secondary">Recebedor: <br><span class="fw-bold">ARTRS SERVIÇOS - R DE SOUZA SERVIÇOS LTDA</span></h5>
 
                 <div class="mt-4">
-                    <a class="btn-payment shadow-sm" href="https://api-gateway.c6bank.info/v1/payment/3f708898-94fd-457e-903c-8188a9cf50cc" target="_blank">
+                    <a class="btn-payment shadow-sm" href="https://api-gateway.c6bank.info/v1/payment/02137644-c835-428e-8f40-e7307d539565" target="_blank">
                         🏦 Pagar com Cartão de Crédito/Débito
                     </a>
                 </div>
