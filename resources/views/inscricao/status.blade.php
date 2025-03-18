@@ -92,7 +92,7 @@
                 <p><strong class="text-primary">👕 Camisas:</strong><br> 👨‍🦱 {{ $inscricao->tamanho_camisa_ele }} 👩‍🦰 {{ $inscricao->tamanho_camisa_ela }}</p>
 
                 <p><strong class="text-primary">💰 Status de Pagamento:</strong><br>
-                    <span class="status-badge badge bg-{{ $inscricao->status_pagamento == 'pago' ? 'success' : 'warning' }}">
+                    <span class="status-badge badge bg-{{ $inscricao->status_pagamento == 'Pago' ? 'success' : 'warning' }}">
                         {{ ucfirst($inscricao->status_pagamento) }}
                     </span>
                 </p>
