@@ -57,8 +57,6 @@
         <!-- Lado esquerdo - Imagem -->
         <div class="col-md-5 d-none d-md-block image-section">
             <img src="/img/logo.png">
-            <br>
-            MODELO DA CAMISA AQUI
         </div>
 
         <!-- Lado direito - Formulário -->
