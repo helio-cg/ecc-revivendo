@@ -8,6 +8,11 @@ use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 
 class StatsOverview extends BaseWidget
 {
+    protected function getColumns(): int
+    {
+        return 1;
+    }
+    
     protected function getStats(): array
     {
         $totalInscritos = Inscricao::count();

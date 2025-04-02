@@ -11,7 +11,7 @@ class StatsInscritos extends ChartWidget
 {
     protected static ?string $heading = 'Inscrições nos últimos 30 dias';
 
-    protected static ?string $maxHeight = '280px';
+    protected static ?string $maxHeight = '364px';
 
     protected function getData(): array
     {

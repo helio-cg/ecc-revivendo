@@ -39,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->maxContentWidth(MaxWidth::Full)
             ->defaultThemeMode(ThemeMode::Light)
             ->darkMode(false)
+            ->font('Roboto')
             //->brandLogo(asset('img/logo.png'))
             //->brandLogoHeight('12rem')
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
