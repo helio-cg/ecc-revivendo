@@ -56,7 +56,15 @@
     <div class="row">
         <!-- Lado esquerdo - Imagem -->
         <div class="col-md-5 d-none d-md-block image-section">
+            <br>
             <img src="/img/logo.png">
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <img src="/img/camisa.jpeg" width="380px">
         </div>
 
         <!-- Lado direito - Formulário -->
