@@ -109,7 +109,11 @@ class InscritoResource extends Resource
                     ->hidden(fn ($record) => $record->status_pagamento === 'Pago'),
                 Tables\Actions\EditAction::make()
                     ->label('Editar')
-                    ->button(),
+                    ->iconButton(),
+                Tables\Actions\DeleteAction::make()
+                    ->label('Remover')
+                    ->requiresConfirmation()
+                    ->iconButton()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
