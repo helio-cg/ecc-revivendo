@@ -59,6 +59,7 @@ class ListInscritos extends ListRecords
 
         foreach ($tamanhos as $tamanho) {
             $quantidade = Inscricao::where('paroquia_id', $paroquiaId)
+                ->whereIn('status_pagamento', ['Pago', 'Cortesia'])
                 ->where(function ($query) use ($tamanho) {
                     $query->where('tamanho_camisa_ele', $tamanho)
                         ->orWhere('tamanho_camisa_ela', $tamanho);
@@ -68,7 +69,7 @@ class ListInscritos extends ListRecords
             $resultado[$tamanho] = $quantidade;
             $total += $quantidade;
         }
-        
+
         $inscricoes = Inscricao::where('paroquia_id', $paroquiaId)
             //->where('status_pagamento', $status)
             ->whereIn('status_pagamento', (array) $status)
