@@ -7,11 +7,12 @@ use App\Models\Paroquia;
 use App\Models\Inscricao;
 use Filament\Actions\Action;
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Traits\HasTableInscricaoTab;
 use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Forms\Components\CheckboxList;
 use App\Filament\Admin\Resources\InscritoResource;
-use App\Traits\HasTableInscricaoTab;
 
 class ListInscritos extends ListRecords
 {
@@ -37,10 +38,11 @@ class ListInscritos extends ListRecords
                         ->native(false)
                         ->required(),
 
-                    Select::make('status_pagamento')
+                    CheckboxList::make('status_pagamento')
                         ->label('Status')
                         ->options([
                             'Pago' => 'Pago',
+                            'Cortesia' => 'Cortesia',
                             'Pendente' => 'Pendente',
                         ])
                         ->required(),
@@ -51,13 +53,30 @@ class ListInscritos extends ListRecords
 
     public static function gerarPdf($paroquiaId, $status)
     {
+        $tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'EXG', 'EXGG'];
+        $resultado = [];
+        $total=0;
+
+        foreach ($tamanhos as $tamanho) {
+            $quantidade = Inscricao::where('paroquia_id', $paroquiaId)
+                ->where(function ($query) use ($tamanho) {
+                    $query->where('tamanho_camisa_ele', $tamanho)
+                        ->orWhere('tamanho_camisa_ela', $tamanho);
+                })
+                ->count();
+
+            $resultado[$tamanho] = $quantidade;
+            $total += $quantidade;
+        }
+        
         $inscricoes = Inscricao::where('paroquia_id', $paroquiaId)
-            ->where('status_pagamento', $status)
+            //->where('status_pagamento', $status)
+            ->whereIn('status_pagamento', (array) $status)
             ->get();
 
         $paroquia = Paroquia::firstWhere('id', $paroquiaId);
 
-        $pdf = Pdf::loadView('pdf.inscricoes', compact('inscricoes','paroquia'))
+        $pdf = Pdf::loadView('pdf.inscricoes', compact('inscricoes','paroquia','resultado','total'))
             ->setPaper('a4', 'landscape');
 
         return response()->streamDownload(

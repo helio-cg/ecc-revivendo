@@ -11,6 +11,7 @@ enum InvoiceStatus: string implements HasLabel, HasColor, HasIcon
     case PAID = 'Pago';
     case REFUNDED = 'Reembolsado';
     case CANCELED = 'Cancelado';
+    case CORTESIA = 'Cortesia';
 
     public function getLabel(): ?string
     {
@@ -19,6 +20,7 @@ enum InvoiceStatus: string implements HasLabel, HasColor, HasIcon
             self::PAID => 'Pago',
             self::REFUNDED => 'Reembolsado',
             self::CANCELED => 'Cancelado',
+            self::CORTESIA => 'Cortesia'
         };
     }
 
@@ -29,6 +31,7 @@ enum InvoiceStatus: string implements HasLabel, HasColor, HasIcon
             self::PAID => 'success',
             self::REFUNDED => 'info',
             self::CANCELED => 'gray',
+            self::CORTESIA => 'black'
         };
     }
 
@@ -39,6 +42,7 @@ enum InvoiceStatus: string implements HasLabel, HasColor, HasIcon
             self::PAID => 'heroicon-m-check-badge',
             self::REFUNDED => 'heroicon-m-check',
             self::CANCELED => 'heroicon-m-x-circle',
+            self::CORTESIA => 'heroicon-m-star'
         };
     }
 }

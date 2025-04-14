@@ -86,11 +86,29 @@
         tr:nth-child(odd) { /* Linhas ímpares */
             background-color: #ffffff; /* Branco */
         }
+        .cam{
+            background-color: #f8f9fa; /* Cinza claro */
+            border: 2px solid #3498db;
+            padding: 4px;
+        }
 
     </style>
 </head>
 <body>
     <h1>{{ $paroquia->name }} - {{ $paroquia->city }}</h1>
+    <h2>Camisas</h2>
+    <div class="cam">
+    @foreach ($resultado as $tamanho => $quantidade)
+        @if ($quantidade > 0)
+            <b>{{ $tamanho }}</b>: {{ $quantidade }} {{ $quantidade == 1 ? 'camisa' : 'camisas' }} -
+        @endif
+    @endforeach
+    @if ($total > 0)
+        <b>Total:</b> {{ $total }} {{ $total == 1 ? 'camisa' : 'camisas' }}
+    @else
+        Nenhuma camisa registrada.
+    @endif
+    </div>
     <h2>Casais Inscritos</h2>
     <table>
         <thead>

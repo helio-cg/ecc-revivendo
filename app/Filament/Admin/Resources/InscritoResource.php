@@ -6,22 +6,24 @@ use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Inscrito;
+use App\Models\Paroquia;
 use Filament\Forms\Form;
 use App\Models\Inscricao;
 use Filament\Tables\Table;
 use App\Enums\InvoiceStatus;
 use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
+use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
+use Filament\Forms\Components\CheckboxList;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Admin\Resources\InscritoResource\Pages;
 use App\Filament\Admin\Resources\InscritoResource\RelationManagers;
-use App\Models\Paroquia;
 
 class InscritoResource extends Resource
 {
@@ -42,10 +44,10 @@ class InscritoResource extends Resource
             ->schema([
                 TextInput::make('nome_usual_ele'),
                 TextInput::make('nome_usual_ela'),
-                Select::make('status_pagamento')
-                    ->label('Status de pagamento')
+                Radio::make('status_pagamento')
+                    ->label('Status da inscrição')
+                    ->inline()
                     ->options(InvoiceStatus::class)
-                    ->searchable()
             ]);
     }
 
@@ -73,6 +75,7 @@ class InscritoResource extends Resource
                         'Pago' => 'success',  // Verde
                         'Pendente' => 'warning', // Amarelo
                         'Cancelado' => 'danger', // Vermelho
+                        'Cortesia' => 'info',
                         default => 'secondary', // Cinza para outros casos
                     }),
                 TextColumn::make('paymentDate')
@@ -106,7 +109,7 @@ class InscritoResource extends Resource
                         'status_pagamento' => 'Pago',
                     ]))
                     ->successNotificationTitle('Pagamento confirmado com sucesso!')
-                    ->hidden(fn ($record) => $record->status_pagamento === 'Pago'),
+                    ->hidden(fn ($record) => $record->status_pagamento === 'Pago' OR $record->status_pagamento === 'Cortesia'),
                 Tables\Actions\EditAction::make()
                     ->label('Editar')
                     ->iconButton(),
