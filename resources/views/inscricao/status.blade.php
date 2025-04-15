@@ -92,7 +92,7 @@
                 <p><strong class="text-primary">👕 Camisas:</strong><br> 👨‍🦱 {{ $inscricao->tamanho_camisa_ele }} 👩‍🦰 {{ $inscricao->tamanho_camisa_ela }}</p>
 
                 <p class="mb-3"><strong class="text-primary">💰 Status de Pagamento:</strong><br><br>
-                    <span class="status-badge badge bg-{{ $inscricao->status_pagamento == 'Pago' OR $inscricao->status_pagamento == 'Cortesia' ? 'success' : 'warning' }}">
+                    <span class="status-badge badge bg-{{ ($inscricao->status_pagamento == 'Pago' OR $inscricao->status_pagamento == 'Cortesia') ? 'success' : 'warning' }}">
                         @if($inscricao->status_pagamento == 'Pago' OR $inscricao->status_pagamento == 'Cortesia')
                             CONFIRMADO
                         @else

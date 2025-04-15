@@ -25,7 +25,8 @@ class TopInscritos extends BaseWidget
                 Paroquia::query()
                     ->select('paroquias.*') // Seleciona os campos da paróquia
                     ->withCount(['inscricao' => function (Builder $query) {
-                        $query->where('status_pagamento', 'pago');
+                        $query->whereIn('status_pagamento', ['pago','cortesia']);
+                        //->whereIn('status_pagamento', ['Pago', 'Cortesia'])
                     }]) // Conta apenas inscrições pagas
                     ->orderByDesc('inscricao_count') // Ordena pelo total de inscrições pagas
                     ->limit(10) // Limita aos 10 primeiros
