@@ -33,6 +33,7 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login(Login::class)
             ->profile()
+            ->topNavigation()
             ->colors([
                 'primary' => Color::Indigo,
             ])
@@ -42,6 +43,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Roboto')
             //->brandLogo(asset('img/logo.png'))
             //->brandLogoHeight('12rem')
+            ->theme(asset('css/filament/admin/theme.css'))
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
