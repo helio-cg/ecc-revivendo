@@ -31,7 +31,7 @@ class InscritoResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-ticket';
 
-    protected static ?string $navigationGroup = 'Inscrição';
+    //protected static ?string $navigationGroup = 'Inscrição';
 
     protected static ?string $navigationLabel = 'Inscrições';
 
