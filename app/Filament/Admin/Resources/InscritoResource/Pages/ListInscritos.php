@@ -83,7 +83,12 @@ class ListInscritos extends ListRecords
                 })*/
                 ->count();
 
-            $resultado[$tamanho] = $quantidade;
+            // Adiciona ao valor já existente
+            if (isset($resultado[$tamanho])) {
+                $resultado[$tamanho] += $quantidade;
+            } else {
+                $resultado[$tamanho] = $quantidade;
+            }
             $total += $quantidade;
         }
 
