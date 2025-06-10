@@ -6,6 +6,7 @@ use App\Models\Paroquia;
 use App\Models\Inscricao;
 use Illuminate\Http\Request;
 use App\Http\Requests\CasalRequest;
+use App\Models\InscricaoIndividual;
 
 class InscricaoController extends Controller
 {
@@ -30,16 +31,25 @@ class InscricaoController extends Controller
     public function buscar(Request $request)
     {
         $request->validate([
-            'telefone' => 'required|integer'
+            'telefone' => 'required|integer',
+            'tipo' => 'required'
         ]);
 
-        $inscricao = Inscricao::where('telefone', $request->telefone)->first();
+        if($request->tipo == 'casal'){
+            $inscricao = Inscricao::where('telefone', $request->telefone)->first();
+        }else{
+            $inscricao = InscricaoIndividual::where('telefone', $request->telefone)->first();
+        }
 
         if (!$inscricao) {
             return redirect()->back()->with('error', 'Inscrição não encontrada.');
         }
 
-        return view('inscricao.status', compact('inscricao'));
+        if($request->tipo == 'casal'){
+            return view('inscricao.status', compact('inscricao'));
+        }
+
+        return view('inscricao-individual.status', compact('inscricao'));
     }
 
     public function status($telefone)

@@ -49,6 +49,14 @@
         <form action="{{ route('inscricao.buscar') }}" method="POST">
             @csrf
             <div class="mb-3">
+                <label class="form-label fw-bold">Tipo:</label>
+                <br>
+                <input type="radio" id="individual" name="tipo" value="individual" required>
+                <label for="individual">Individual</label><br>
+
+                <input type="radio" id="casal" name="tipo" value="casal" required>
+                <label for="casal">Casal</label><br><br>
+
                 <label class="form-label fw-bold">Telefone:</label>
                 <input type="number" name="telefone" class="form-control text-center" placeholder="Somente números 88988887777" required>
             </div>
