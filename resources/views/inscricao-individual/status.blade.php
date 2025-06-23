@@ -118,7 +118,7 @@
                 <h5 class="text-secondary">Recebedor: <br><span class="fw-bold">ARTRS SERVIÇOS - R DE SOUZA SERVIÇOS LTDA</span></h5>
 {{--
                 <div class="mt-4">
-                    <a class="btn-payment shadow-sm" href="https://api-gateway.c6bank.info/v1/payment/02137644-c835-428e-8f40-e7307d539565" target="_blank">
+                    <a class="btn-payment shadow-sm" href="https://mpago.li/1TsuxiV" target="_blank">
                         🏦 Pagar com Cartão de Crédito/Débito
                     </a>
                 </div>
