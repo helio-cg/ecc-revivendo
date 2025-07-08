@@ -72,9 +72,9 @@
         <br>
         <p class="text-muted">Nosso encontro será realizado domingo<br>03 de agosto de 2025 na cidade de Iguatu-CE</p>
         <br>
-        <a href="/inscricao" class="btn btn-primary">👩‍❤️‍👨 Fazer Inscrição CASAL</a>
+        <a href="/inscricao" class="btn btn-primary">👩‍❤️‍👨 Inscrição CASAL</a>
         <br>
-        <a href="/inscricao-individual" class="btn btn-primary">🧑 Fazer Inscrição INDIVIDUAL</a>
+        <a href="/inscricao-individual" class="btn btn-primary">🧑 Inscrição INDIVIDUAL (Viúvos do ECC)</a>
         <br>
         <a href="/consultar-inscricao" class="btn btn-secondary">🔍 Consultar Inscrição</a>
         <br>
