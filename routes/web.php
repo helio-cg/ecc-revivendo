@@ -6,7 +6,7 @@ use App\Http\Controllers\InscricaoIndividualController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 /* Casal */
 Route::get('/inscricao', [InscricaoController::class, 'create'])->name('inscricao.form');

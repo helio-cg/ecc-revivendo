@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Paroquia;
 use App\Models\Inscricao;
 use Illuminate\Http\Request;
@@ -12,6 +13,13 @@ class InscricaoController extends Controller
 {
     public function create()
     {
+        $hoje = Carbon::today();
+        $dataLimite = Carbon::createFromFormat('d/m/Y', '23/07/2025'); // por exemplo
+
+        if ($hoje->gt($dataLimite)) {
+            return redirect()->route('home');
+        }
+        
         $paroquias = Paroquia::orderBy('name')->get();
         return view('inscricao.form', compact('paroquias'));
     }

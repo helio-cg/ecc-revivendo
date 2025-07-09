@@ -103,9 +103,9 @@
 
                 @if ($inscricao->status_pagamento == 'Pendente')
                     <p>
-                        <a href="https://wa.me/5588982121807" target="_blank" class="btn-whatsapp shadow-lg">
+                        <a href="https://wa.me/5512981026660" target="_blank" class="btn-whatsapp shadow-lg">
                             <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" width="25">
-                            Enviar Comprovante para WhatsApp (88) 98212-1807
+                            Enviar Comprovante para WhatsApp (12) 98102-6660
                         </a>
                     </p>
                 @endif
