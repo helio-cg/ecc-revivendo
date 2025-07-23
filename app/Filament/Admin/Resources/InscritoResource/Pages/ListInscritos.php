@@ -24,6 +24,11 @@ class ListInscritos extends ListRecords
     {
         return [
             //Actions\CreateAction::make(),
+            Action::make('Total Geral Casais')
+                ->label('Total Geral Casais')
+                ->icon('heroicon-o-document-text')
+                ->color('primary')
+                ->action(fn (array $data) => static::gerarPdfGeral()),
             Action::make('Gerar PDF')
                 ->label('Gerar PDF')
                 ->icon('heroicon-o-check-circle')
@@ -107,4 +112,61 @@ class ListInscritos extends ListRecords
             "inscricoes_{$paroquia->name}_{$paroquia->city}.pdf"
         );
     }
+
+    public static function gerarPdfGeral()
+    {
+        $tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'EXG', 'EXGG'];
+        $paroquias = Paroquia::all();
+
+        $tabela = [];
+        $totalGeral = array_fill_keys($tamanhos, 0);
+        $totalGeral['total'] = 0;
+
+        foreach ($paroquias as $paroquia) {
+            $resultado = [];
+            $total = 0;
+
+            foreach ($tamanhos as $tamanho) {
+                $quantidadeEla = Inscricao::where('paroquia_id', $paroquia->id)
+                    //->whereIn('status_pagamento', (array)$status)
+                    ->where('tamanho_camisa_ela', $tamanho)
+                    ->count();
+
+                $quantidadeEle = Inscricao::where('paroquia_id', $paroquia->id)
+                    //->whereIn('status_pagamento', (array)$status)
+                    ->where('tamanho_camisa_ele', $tamanho)
+                    ->count();
+
+                $soma = $quantidadeEla + $quantidadeEle;
+
+                $resultado[$tamanho] = $soma;
+                $total += $soma;
+
+                // Acumula total geral
+                $totalGeral[$tamanho] += $soma;
+            }
+
+            $resultado['total'] = $total;
+            $totalGeral['total'] += $total;
+
+            $tabela[] = [
+                'paroquia' => $paroquia->name,
+                'cidade' => $paroquia->city,
+                'dados' => $resultado,
+            ];
+        }
+
+        // Geração do PDF
+        $pdf = Pdf::loadView('pdf.inscricoes-geral', [
+            'tabela' => $tabela,
+            'totalGeral' => $totalGeral,
+            'tamanhos' => $tamanhos,
+        ])->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            "inscricoes_geral.pdf"
+        );
+    }
+
 }

@@ -21,6 +21,11 @@ class ListInscritoIndividuals extends ListRecords
     {
         return [
             //Actions\CreateAction::make(),
+             Action::make('Total Geral Individual')
+                ->label('Total Geral Individual')
+                ->icon('heroicon-o-document-text')
+                ->color('primary')
+                ->action(fn (array $data) => static::gerarPdfGeralIndividuais()),
             Action::make('Gerar PDF')
                 ->label('Gerar PDF')
                 ->icon('heroicon-o-check-circle')
@@ -89,4 +94,54 @@ class ListInscritoIndividuals extends ListRecords
             "inscricoes_individuais_{$paroquia->name}_{$paroquia->city}.pdf"
         );
     }
+
+    public static function gerarPdfGeralIndividuais()
+    {
+        $tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'EXG', 'EXGG'];
+        $paroquias = Paroquia::all();
+
+        $tabela = [];
+        $totalGeral = array_fill_keys($tamanhos, 0);
+        $totalGeral['total'] = 0;
+
+        foreach ($paroquias as $paroquia) {
+            $resultado = [];
+            $total = 0;
+
+            foreach ($tamanhos as $tamanho) {
+                $quantidade = InscricaoIndividual::where('paroquia_id', $paroquia->id)
+                   // ->whereIn('status_pagamento', (array)$status)
+                    ->where('tamanho_camisa', $tamanho)
+                    ->count();
+
+                $resultado[$tamanho] = $quantidade;
+                $total += $quantidade;
+
+                // Acumula total geral
+                $totalGeral[$tamanho] += $quantidade;
+            }
+
+            $resultado['total'] = $total;
+            $totalGeral['total'] += $total;
+
+            $tabela[] = [
+                'paroquia' => $paroquia->name,
+                'cidade' => $paroquia->city,
+                'dados' => $resultado,
+            ];
+        }
+
+        // Geração do PDF
+        $pdf = Pdf::loadView('pdf.inscricoes-individuais-geral', [
+            'tabela' => $tabela,
+            'totalGeral' => $totalGeral,
+            'tamanhos' => $tamanhos,
+        ])->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            "inscricoes_individuais_geral.pdf"
+        );
+    }
+
 }
