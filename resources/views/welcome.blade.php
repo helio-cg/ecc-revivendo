@@ -70,10 +70,10 @@
         <img src="/img/logo.png">
         <h1 class="text-primary fw-bold">XXII Revivendo - ECC</h1>
         @php
-            $hoje = \Carbon\Carbon::now();
-            $dataLimite = \Carbon\Carbon::createFromFormat('d/m/Y', '24/07/2023');
+            $hoje = strtotime(now());
+            $dataLimite = DateTime::createFromFormat('d/m/Y', '24/07/2025')->getTimestamp();
         @endphp
-        @if($hoje->lt($dataLimite))
+        @if($hoje > $dataLimite)
          <br>
             <div class="text-red-600 font-semibold">
                 <h1>Inscrições encerrada.</h1>
