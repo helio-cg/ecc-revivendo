@@ -44,6 +44,14 @@ class InscritoResource extends Resource
             ->schema([
                 TextInput::make('nome_usual_ele'),
                 TextInput::make('nome_usual_ela'),
+                Select::make('paroquia_id')
+                    ->label('Paróquia')
+                    ->relationship('paroquia', 'name', function (Builder $query) {
+                        $query->selectRaw("id, CONCAT(name, ' - ', city) as name");
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Radio::make('status_pagamento')
                     ->label('Status da inscrição')
                     ->inline()

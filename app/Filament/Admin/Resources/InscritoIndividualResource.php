@@ -13,6 +13,7 @@ use App\Models\InscritoIndividual;
 use App\Models\InscricaoIndividual;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Forms\Components\TextInput;
 use Filament\Tables\Filters\SelectFilter;
@@ -37,6 +38,14 @@ class InscritoIndividualResource extends Resource
         return $form
             ->schema([
                 TextInput::make('nome_usual'),
+                Select::make('paroquia_id')
+                    ->label('Paróquia')
+                    ->relationship('paroquia', 'name', function (Builder $query) {
+                        $query->selectRaw("id, CONCAT(name, ' - ', city) as name");
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Radio::make('status_pagamento')
                     ->label('Status da inscrição')
                     ->inline()
