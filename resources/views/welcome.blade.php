@@ -71,7 +71,7 @@
         <h1 class="text-primary fw-bold">XXII Revivendo - ECC</h1>
         @php
             $hoje = strtotime(now());
-            $dataLimite = DateTime::createFromFormat('d/m/Y', '23/07/2025')->getTimestamp();
+            $dataLimite = DateTime::createFromFormat('d/m/Y', '28/07/2025')->getTimestamp();
         @endphp
         @if($hoje > $dataLimite)
          <br>

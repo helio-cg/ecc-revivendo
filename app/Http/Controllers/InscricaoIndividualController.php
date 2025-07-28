@@ -13,7 +13,7 @@ class InscricaoIndividualController extends Controller
     public function create()
     {
         $hoje = Carbon::today();
-        $dataLimite = Carbon::createFromFormat('d/m/Y', '25/07/2025'); // por exemplo
+        $dataLimite = Carbon::createFromFormat('d/m/Y', '29/07/2025'); // por exemplo
 
         if ($hoje->gt($dataLimite)) {
             return redirect()->route('home');
