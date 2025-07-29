@@ -89,12 +89,27 @@ class InscritoResource extends Resource
 
                 Select::make('paroquia_id')
                     ->label('Paróquia')
-                    ->relationship('paroquia', 'name', function (Builder $query) {
-                        $query->selectRaw("id, CONCAT(name, ' - ', city) as name");
+                    ->options(function () {
+                        return \App\Models\Paroquia::query()
+                            ->orderBy('city')
+                            ->orderBy('name')
+                            ->get()
+                            ->groupBy('city')
+                            ->mapWithKeys(function ($group, $city) {
+                                return [
+                                    $city => $group->mapWithKeys(function ($paroquia) {
+                                        return [
+                                            $paroquia->id => "{$paroquia->name} - {$paroquia->city}",
+                                        ];
+                                    }),
+                                ];
+                            })
+                            ->toArray();
                     })
                     ->searchable()
-                    ->preload()
-                    ->required(),
+                    ->required()
+                    ->preload(),
+
                 TextInput::make('telefone')
                     ->required(),
                 Radio::make('status_pagamento')
