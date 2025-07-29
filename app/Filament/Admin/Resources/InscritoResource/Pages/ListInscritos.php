@@ -23,7 +23,10 @@ class ListInscritos extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            //Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Nova Inscrição')
+                ->icon('heroicon-o-plus')
+                ->color('danger'),
             Action::make('Total Geral Casais')
                 ->label('Total Geral Casais')
                 ->icon('heroicon-o-document-text')

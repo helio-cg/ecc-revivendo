@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
@@ -42,8 +43,50 @@ class InscritoResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('nome_usual_ele'),
-                TextInput::make('nome_usual_ela'),
+                Fieldset::make('Dados Ele')
+                ->schema([
+                    TextInput::make('nome_ele')
+                        ->label('Nome completo ele')
+                        ->columnSpan(2),
+                    TextInput::make('nome_usual_ele')
+                        ->columnSpan(2),
+                    Select::make('tamanho_camisa_ele')
+                        ->label('Tamanho da camisa ELE')
+                        ->options([
+                            'PP' => 'PP',
+                            'P' => 'P',
+                            'M' => 'M',
+                            'G' => 'G',
+                            'GG' => 'GG',
+                            'EXG' => 'EXG',
+                            'EXGG' => 'EXGG',
+                        ])
+                        ->required()
+                        ->columnSpan(1),
+                ])->columns(5),
+                Fieldset::make('Dados Ela')
+                ->schema([
+                    TextInput::make('nome_ela')
+                        ->label('Nome completo ela')
+                        ->columnSpan(2),
+                    TextInput::make('nome_usual_ela')
+                        ->columnSpan(2),
+                    Select::make('tamanho_camisa_ela')
+                        ->label('Tamanho da camisa ELA')
+                        ->options([
+                            'PP' => 'PP',
+                            'P' => 'P',
+                            'M' => 'M',
+                            'G' => 'G',
+                            'GG' => 'GG',
+                            'EXG' => 'EXG',
+                            'EXGG' => 'EXGG',
+                        ])
+                        ->required()
+                        ->columnSpan(1),
+                ])->columns(5),
+
+
                 Select::make('paroquia_id')
                     ->label('Paróquia')
                     ->relationship('paroquia', 'name', function (Builder $query) {
@@ -52,10 +95,14 @@ class InscritoResource extends Resource
                     ->searchable()
                     ->preload()
                     ->required(),
+                TextInput::make('telefone')
+                    ->required(),
                 Radio::make('status_pagamento')
                     ->label('Status da inscrição')
                     ->inline()
+                    ->inlineLabel(false)
                     ->options(InvoiceStatus::class)
+                    ->required()
             ])->columns(1);
     }
 
