@@ -4,83 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inscrição no Evento</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <style>
-        body {
-            background: linear-gradient(135deg, #D2CCE6FF, #e3f2fd);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            max-width: 900px;
-            width: 100%;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .row {
-            display: flex;
-            align-items: center;
-        }
-        .image-section {
-            background: url('https://via.placeholder.com/450') no-repeat center center/cover;
-            min-height: 100%;
-        }
-        .form-section {
-            padding: 30px;
-        }
-        .btn-custom {
-            background: linear-gradient(135deg, #007bff, #6610f2);
-            border: none;
-            color: white;
-            font-weight: bold;
-            transition: 0.3s ease-in-out;
-        }
-        .btn-custom:hover {
-            background: linear-gradient(135deg, #6610f2, #007bff);
-            transform: scale(1.05);
-        }
-        .error-list {
-            color: #dc3545;
-            font-size: 0.9rem;
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100 flex items-center justify-center p-4">
 
-<div class="container">
-    <div class="row">
+    <div class="backdrop-blur-md bg-white/80 shadow-xl rounded-2xl w-full max-w-5xl overflow-hidden flex flex-col md:flex-row">
         <!-- Lado esquerdo - Imagem -->
-        <div class="col-md-5 d-none d-md-block image-section">
-            <br>
-            <img src="/img/logo.png">
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <img src="/img/camisa.jpeg" width="380px">
+        <div class="hidden md:flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat bg-gray-200 md:w-2/5 p-6" style="background-image: url('https://via.placeholder.com/450')">
+            <img src="/img/logo.png" alt="Logo" class="w-40 mb-8">
+            <img src="/img/camisa.jpeg" alt="Camisa" class="w-80 rounded-lg shadow-md">
         </div>
 
         <!-- Lado direito - Formulário -->
-        <div class="col-md-7 form-section">
-            <h2 class="text-center text-primary fw-bold">Inscrição para XXII Revivendo - ECC</h2>
-            <hr>
+        <div class="w-full md:w-3/5 p-8">
+            <h2 class="text-center text-indigo-700 text-2xl font-bold mb-4">Inscrição para XXII Revivendo - ECC</h2>
+            <hr class="mb-4">
 
             @if(session('success'))
-                <div class="alert alert-success text-center">
+                <div class="bg-green-100 text-green-700 p-3 rounded mb-4 text-center font-medium">
                     {{ session('success') }}
                 </div>
             @endif
 
             @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul class="error-list">
+                <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+                    <ul class="list-disc list-inside text-sm">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
                         @endforeach
@@ -91,76 +39,73 @@
             <form action="{{ route('inscricao.store') }}" method="POST">
                 @csrf
 
-                <h5 class="text-primary fw-bold">Dados ELE</h5>
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Nome completo:</label>
-                    <input type="text" name="nome_ele" class="form-control" value="{{ old('nome_ele') }}">
+                <h5 class="text-indigo-700 font-semibold mb-2">Dados ELE</h5>
+                <div class="mb-4">
+                    <label class="block font-semibold mb-1">Nome completo:</label>
+                    <input type="text" name="nome_ele" class="w-full border border-gray-300 rounded px-3 py-2" value="{{ old('nome_ele') }}">
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Nome usual (apelido):</label>
-                        <input type="text" name="nome_usual_ele" class="form-control" value="{{ old('nome_usual_ele') }}">
+
+                <div class="flex gap-4">
+                    <div class="w-1/2 mb-4">
+                        <label class="block font-semibold mb-1">Nome usual (apelido):</label>
+                        <input type="text" name="nome_usual_ele" class="w-full border border-gray-300 rounded px-3 py-2" value="{{ old('nome_usual_ele') }}">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Tamanho da camisa:</label>
-                        <select class="form-select" name="tamanho_camisa_ele">
+                    <div class="w-1/2 mb-4">
+                        <label class="block font-semibold mb-1">Tamanho da camisa:</label>
+                        <select name="tamanho_camisa_ele" class="w-full border border-gray-300 rounded px-3 py-2">
                             <option value="">Selecione um opção</option>
-                            <option value="PP" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'PP' ? 'selected' : '' }}>PP</option>
-                            <option value="P" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'P' ? 'selected' : '' }}>P</option>
-                            <option value="M" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'M' ? 'selected' : '' }}>M</option>
-                            <option value="G" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'G' ? 'selected' : '' }}>G</option>
-                            <option value="GG" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'GG' ? 'selected' : '' }}>GG</option>
-                            <option value="EXG" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'EXG' ? 'selected' : '' }}>EXG</option>
-                            <option value="EXGG" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == 'EXGG' ? 'selected' : '' }}>EXGG</option>
+                            @foreach (['PP','P','M','G','GG','EXG','EXGG'] as $tamanho)
+                                <option value="{{ $tamanho }}" {{ old('tamanho_camisa_ele', $tamanho_camisa_ele ?? '') == $tamanho ? 'selected' : '' }}>{{ $tamanho }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
 
-                <h5 class="text-danger fw-bold">Dados ELA</h5>
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Nome completo:</label>
-                    <input type="text" name="nome_ela" class="form-control" value="{{ old('nome_ela') }}">
+                <h5 class="text-red-600 font-semibold mt-6 mb-2">Dados ELA</h5>
+                <div class="mb-4">
+                    <label class="block font-semibold mb-1">Nome completo:</label>
+                    <input type="text" name="nome_ela" class="w-full border border-gray-300 rounded px-3 py-2" value="{{ old('nome_ela') }}">
                 </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Nome usual (apelido):</label>
-                        <input type="text" name="nome_usual_ela" class="form-control" value="{{ old('nome_usual_ela') }}">
+
+                <div class="flex gap-4">
+                    <div class="w-1/2 mb-4">
+                        <label class="block font-semibold mb-1">Nome usual (apelido):</label>
+                        <input type="text" name="nome_usual_ela" class="w-full border border-gray-300 rounded px-3 py-2" value="{{ old('nome_usual_ela') }}">
                     </div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Tamanho da camisa:</label>
-                        <select class="form-select" name="tamanho_camisa_ela">
+                    <div class="w-1/2 mb-4">
+                        <label class="block font-semibold mb-1">Tamanho da camisa:</label>
+                        <select name="tamanho_camisa_ela" class="w-full border border-gray-300 rounded px-3 py-2">
                             <option value="">Selecione um opção</option>
-                            <option value="PP" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'PP' ? 'selected' : '' }}>PP</option>
-                            <option value="P" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'P' ? 'selected' : '' }}>P</option>
-                            <option value="M" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'M' ? 'selected' : '' }}>M</option>
-                            <option value="G" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'G' ? 'selected' : '' }}>G</option>
-                            <option value="GG" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'GG' ? 'selected' : '' }}>GG</option>
-                            <option value="EXG" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'EXG' ? 'selected' : '' }}>EXG</option>
-                            <option value="EXGG" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == 'EXGG' ? 'selected' : '' }}>EXGG</option>
+                            @foreach (['PP','P','M','G','GG','EXG','EXGG'] as $tamanho)
+                                <option value="{{ $tamanho }}" {{ old('tamanho_camisa_ela', $tamanho_camisa_ela ?? '') == $tamanho ? 'selected' : '' }}>{{ $tamanho }}</option>
+                            @endforeach
                         </select>
                     </div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Telefone com DDD: <span class="text-danger">(Somente números)</span></label>
-                    <input type="number" name="telefone" class="form-control" value="{{ old('telefone') }}" required>
+                <div class="mb-4">
+                    <label class="block font-semibold mb-1">Telefone com DDD: <span class="text-red-600 text-sm">(Somente números)</span></label>
+                    <input type="number" name="telefone" class="w-full border border-gray-300 rounded px-3 py-2" value="{{ old('telefone') }}" required>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label fw-bold">Paróquia:</label>
-                    <select class="form-control" name="paroquia_id">
+                <div class="mb-6">
+                    <label class="block font-semibold mb-1">Paróquia:</label>
+                    <select name="paroquia_id" class="w-full border border-gray-300 rounded px-3 py-2">
                         <option value="">Selecione uma paróquia</option>
                         @foreach ($paroquias as $paroquia)
-                            <option value="{{ $paroquia->id }}" {{ old('paroquia_id', $paroquia_id ?? '') == $paroquia->id ? 'selected' : '' }}>{{ $paroquia->name }} - {{ $paroquia->city }} </option>
+                            <option value="{{ $paroquia->id }}" {{ old('paroquia_id', $paroquia_id ?? '') == $paroquia->id ? 'selected' : '' }}>
+                                {{ $paroquia->name }} - {{ $paroquia->city }}
+                            </option>
                         @endforeach
                     </select>
                 </div>
 
-                <button type="submit" class="btn btn-custom btn-lg w-100 mt-3">📩 Enviar Inscrição</button>
+                <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:scale-105 transition transform duration-300 ease-in-out shadow-md">
+                    📩 Enviar Inscrição
+                </button>
             </form>
         </div>
     </div>
-</div>
 
 </body>
 </html>
