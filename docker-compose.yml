@@ -59,6 +59,33 @@ services:
             MYSQL_USERNAME: "${DB_USERNAME}"
             MYSQL_ROOT_PASSWORD: "${DB_PASSWORD}"
             PMA_HOST: mysql
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        networks:
+            - sail
+    queue:
+        build:
+            context: ./vendor/laravel/sail/runtimes/8.3
+            dockerfile: Dockerfile
+            args:
+                WWWGROUP: '${WWWGROUP}'
+        image: sail-8.3/queue
+        restart: always
+        working_dir: /var/www/html
+        command: >
+            sh -c "php artisan queue:work --sleep=3 --tries=3 --max-time=3600"
+        environment:
+            LARAVEL_SAIL: 1
+            WWWUSER: '${WWWUSER}'
+        volumes:
+            - '.:/var/www/html'
+        depends_on:
+            - mysql
+            - redis
+        networks:
+            - sail
 networks:
     sail:
         driver: bridge
