@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources\InscritoIndividualResource\Pages;
+namespace App\Filament\Admin\Resources\InscritoIndividuals\Pages;
 
-use App\Filament\Admin\Resources\InscritoIndividualResource;
+use App\Filament\Admin\Resources\InscritoIndividuals\InscritoIndividualResource;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 

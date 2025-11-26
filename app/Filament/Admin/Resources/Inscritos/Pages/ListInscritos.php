@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources\InscritoResource\Pages;
+namespace App\Filament\Admin\Resources\Inscritos\Pages;
 
+use Filament\Actions\CreateAction;
 use Filament\Actions;
 use App\Models\Paroquia;
 use App\Models\Inscricao;
@@ -12,7 +13,7 @@ use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Forms\Components\CheckboxList;
-use App\Filament\Admin\Resources\InscritoResource;
+use App\Filament\Admin\Resources\Inscritos\InscritoResource;
 
 class ListInscritos extends ListRecords
 {
@@ -23,7 +24,7 @@ class ListInscritos extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
+            CreateAction::make()
                 ->label('Nova Inscrição')
                 ->icon('heroicon-o-plus')
                 ->color('danger'),
@@ -36,7 +37,7 @@ class ListInscritos extends ListRecords
                 ->label('Gerar PDF')
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
-                ->form([
+                ->schema([
                     Select::make('paroquia_id')
                         ->label('Paróquia')
                         ->relationship('paroquia', 'name')

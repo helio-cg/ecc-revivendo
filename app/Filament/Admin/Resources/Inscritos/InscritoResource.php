@@ -1,21 +1,27 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Admin\Resources\Inscritos;
 
+use Filament\Schemas\Schema;
+use Filament\Schemas\Components\Fieldset;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use App\Filament\Admin\Resources\Inscritos\Pages\ListInscritos;
+use App\Filament\Admin\Resources\Inscritos\Pages\CreateInscrito;
+use App\Filament\Admin\Resources\Inscritos\Pages\EditInscrito;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Tables;
 use App\Models\Inscrito;
 use App\Models\Paroquia;
-use Filament\Forms\Form;
 use App\Models\Inscricao;
 use Filament\Tables\Table;
 use App\Enums\InvoiceStatus;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Fieldset;
 use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
@@ -30,7 +36,7 @@ class InscritoResource extends Resource
 {
     protected static ?string $model = Inscricao::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-ticket';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-ticket';
 
     //protected static ?string $navigationGroup = 'Inscrição';
 
@@ -39,10 +45,10 @@ class InscritoResource extends Resource
     protected static ?string $modelLabel = 'inscrição do casal';
     protected static ?string $pluralModelLabel = 'inscrições de casais';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 Fieldset::make('Dados Ele')
                 ->schema([
                     TextInput::make('nome_ele')
@@ -90,7 +96,7 @@ class InscritoResource extends Resource
                 Select::make('paroquia_id')
                     ->label('Paróquia')
                     ->options(function () {
-                        return \App\Models\Paroquia::query()
+                        return Paroquia::query()
                             ->orderBy('city')
                             ->orderBy('name')
                             ->get()
@@ -164,7 +170,7 @@ class InscritoResource extends Resource
                         $query->selectRaw("id, CONCAT(name, ' - ', city) as name");
                     }),
             ])
-            ->actions([
+            ->recordActions([
 
                 Action::make('marcarPago')
                     ->label('Marcar Pago')
@@ -180,16 +186,16 @@ class InscritoResource extends Resource
                     ]))
                     ->successNotificationTitle('Pagamento confirmado com sucesso!')
                     ->hidden(fn ($record) => $record->status_pagamento === 'Pago' OR $record->status_pagamento === 'Cortesia'),
-                Tables\Actions\EditAction::make()
+                EditAction::make()
                     ->label('Editar')
                     ->iconButton(),
-                Tables\Actions\DeleteAction::make()
+                DeleteAction::make()
                     ->label('Remover')
                     ->requiresConfirmation()
                     ->iconButton()
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+            ->toolbarActions([
+                BulkActionGroup::make([
                     //Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
@@ -205,9 +211,9 @@ class InscritoResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListInscritos::route('/'),
-            'create' => Pages\CreateInscrito::route('/create'),
-            'edit' => Pages\EditInscrito::route('/{record}/edit'),
+            'index' => ListInscritos::route('/'),
+            'create' => CreateInscrito::route('/create'),
+            'edit' => EditInscrito::route('/{record}/edit'),
         ];
     }
 }

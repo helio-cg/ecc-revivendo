@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Admin\Resources\InscritoResource\Pages;
+namespace App\Filament\Admin\Resources\Inscritos\Pages;
 
-use App\Filament\Admin\Resources\InscritoResource;
+use App\Filament\Admin\Resources\Inscritos\InscritoResource;
 use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 

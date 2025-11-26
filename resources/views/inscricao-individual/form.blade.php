@@ -6,7 +6,7 @@
   <title>Inscrição no Evento</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100 flex items-center justify-center p-4">
+<body class="min-h-screen bg-linear-to-br from-indigo-100 to-blue-100 flex items-center justify-center p-4">
 
   <div class="backdrop-blur-md bg-white/80 shadow-xl rounded-2xl w-full max-w-5xl overflow-hidden flex flex-col md:flex-row">
 
@@ -78,7 +78,7 @@
           </select>
         </div>
 
-        <button type="submit" class="w-full py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:scale-105 transition transform duration-300 ease-in-out shadow-md">
+        <button type="submit" class="w-full py-3 bg-linear-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-lg hover:scale-105 transition transform duration-300 ease-in-out shadow-md">
           📩 Enviar Inscrição
         </button>
       </form>

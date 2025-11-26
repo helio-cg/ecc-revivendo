@@ -32,16 +32,16 @@ class TopInscritos extends BaseWidget
                     ->limit(10) // Limita aos 10 primeiros
             )
             ->columns([
-                Tables\Columns\TextColumn::make('ranking')
+                TextColumn::make('ranking')
                     ->label('Posição')
                     ->getStateUsing(function ($record, $rowLoop) {
                         return $rowLoop->iteration.'º'; // Numera de 1 a 10
                     })
                     ->alignCenter(),
-                Tables\Columns\TextColumn::make('name')
+                TextColumn::make('name')
                     ->label('Paróquia')
                     ->formatStateUsing(fn ($record) => "{$record->name} - {$record->city}"),
-                Tables\Columns\TextColumn::make('inscricao_count')
+                TextColumn::make('inscricao_count')
                     ->label('Total de Inscrições')
                     ->formatStateUsing(fn ($record) => "{$record->inscricao_count} confirmadas"),
             ])

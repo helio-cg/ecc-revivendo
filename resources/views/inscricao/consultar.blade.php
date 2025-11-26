@@ -6,7 +6,7 @@
   <title>Consultar Inscrição</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100 flex items-center justify-center p-6">
+<body class="min-h-screen bg-linear-to-br from-indigo-100 to-blue-100 flex items-center justify-center p-6">
 
   <div class="w-full max-w-md bg-white/80 backdrop-blur-md shadow-2xl rounded-xl p-6">
     <div class="text-center mb-6">
@@ -48,7 +48,7 @@
       </div>
 
       <button type="submit"
-              class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition transform hover:scale-105">
+              class="w-full bg-linear-to-r from-blue-600 to-indigo-600 hover:from-indigo-600 hover:to-blue-600 text-white font-bold py-3 rounded-lg shadow-md transition transform hover:scale-105">
         🔍 Buscar
       </button>
     </form>

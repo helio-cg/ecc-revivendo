@@ -6,7 +6,7 @@
   <title>Status da Inscrição</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100 font-sans flex items-center justify-center p-6">
+<body class="min-h-screen bg-linear-to-br from-indigo-100 to-blue-100 font-sans flex items-center justify-center p-6">
 
   <div class="w-full max-w-3xl bg-white/80 backdrop-blur-md shadow-xl rounded-2xl p-6">
 

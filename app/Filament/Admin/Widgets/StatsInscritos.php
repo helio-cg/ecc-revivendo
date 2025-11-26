@@ -9,9 +9,9 @@ use Filament\Widgets\ChartWidget;
 
 class StatsInscritos extends ChartWidget
 {
-    protected static ?string $heading = 'Inscrições nos últimos 30 dias';
+    protected ?string $heading = 'Inscrições nos últimos 30 dias';
 
-    protected static ?string $maxHeight = '406px';
+    protected ?string $maxHeight = '406px';
 
     protected function getData(): array
     {

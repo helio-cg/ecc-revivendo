@@ -1,8 +1,8 @@
 <?php
 namespace App\Traits;
 
+use Filament\Schemas\Components\Tabs\Tab;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Resources\Components\Tab;
 
 trait HasTableInscricaoTab {
 

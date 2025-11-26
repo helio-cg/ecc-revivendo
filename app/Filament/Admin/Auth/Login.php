@@ -4,10 +4,9 @@ namespace App\Filament\Admin\Auth;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\Component;
 use Filament\Forms\Components\TextInput;
-use Filament\Pages\Auth\Login as BaseAuth;
 use Illuminate\Contracts\Support\Htmlable;
 
-class Login extends BaseAuth
+class Login extends \Filament\Auth\Pages\Login
 {
     public function mount(): void
     {

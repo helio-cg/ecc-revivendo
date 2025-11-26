@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\InscritoIndividualResource\Pages;
+namespace App\Filament\Admin\Resources\InscritoIndividuals\Pages;
 
 use Filament\Actions;
 use App\Models\Paroquia;
@@ -10,7 +10,7 @@ use Filament\Forms\Components\Select;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Resources\Pages\ListRecords;
 use Filament\Forms\Components\CheckboxList;
-use App\Filament\Admin\Resources\InscritoIndividualResource;
+use App\Filament\Admin\Resources\InscritoIndividuals\InscritoIndividualResource;
 use App\Models\InscricaoIndividual;
 
 class ListInscritoIndividuals extends ListRecords
@@ -30,7 +30,7 @@ class ListInscritoIndividuals extends ListRecords
                 ->label('Gerar PDF')
                 ->icon('heroicon-o-check-circle')
                 ->color('success')
-                ->form([
+                ->schema([
                     Select::make('paroquia_id')
                         ->label('Paróquia')
                         ->relationship('paroquia', 'name')

@@ -1,17 +1,22 @@
 <?php
 
-namespace App\Filament\Admin\Resources;
+namespace App\Filament\Admin\Resources\InscritoIndividuals;
 
+use Filament\Schemas\Schema;
+use Filament\Actions\Action;
+use Filament\Actions\EditAction;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\BulkActionGroup;
+use App\Filament\Admin\Resources\InscritoIndividuals\Pages\ListInscritoIndividuals;
+use App\Filament\Admin\Resources\InscritoIndividuals\Pages\EditInscritoIndividual;
 use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Tables;
-use Filament\Forms\Form;
 use Filament\Tables\Table;
 use App\Enums\InvoiceStatus;
 use Filament\Resources\Resource;
 use App\Models\InscritoIndividual;
 use App\Models\InscricaoIndividual;
-use Filament\Tables\Actions\Action;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Select;
 use Filament\Tables\Columns\TextColumn;
@@ -26,17 +31,17 @@ class InscritoIndividualResource extends Resource
 {
     protected static ?string $model = InscricaoIndividual::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-rectangle-stack';
 
     protected static ?string $navigationLabel = 'Inscrições Individuais';
 
     protected static ?string $modelLabel = 'inscrição individual';
     protected static ?string $pluralModelLabel = 'inscrições individuais';
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
-            ->schema([
+        return $schema
+            ->components([
                 TextInput::make('nome_usual'),
                 Select::make('paroquia_id')
                     ->label('Paróquia')
@@ -96,7 +101,7 @@ class InscritoIndividualResource extends Resource
                         $query->selectRaw("id, CONCAT(name, ' - ', city) as name");
                     }),
             ])
-            ->actions([
+            ->recordActions([
                 Action::make('marcarPago')
                     ->label('Marcar Pago')
                     ->icon('heroicon-o-check-circle')
@@ -111,16 +116,16 @@ class InscritoIndividualResource extends Resource
                     ]))
                     ->successNotificationTitle('Pagamento confirmado com sucesso!')
                     ->hidden(fn ($record) => $record->status_pagamento === 'Pago' OR $record->status_pagamento === 'Cortesia'),
-                Tables\Actions\EditAction::make()
+                EditAction::make()
                     ->label('Editar')
                     ->iconButton(),
-                Tables\Actions\DeleteAction::make()
+                DeleteAction::make()
                     ->label('Remover')
                     ->requiresConfirmation()
                     ->iconButton()
             ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
+            ->toolbarActions([
+                BulkActionGroup::make([
                     //Tables\Actions\DeleteBulkAction::make(),
                 ]),
             ]);
@@ -136,9 +141,9 @@ class InscritoIndividualResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListInscritoIndividuals::route('/'),
+            'index' => ListInscritoIndividuals::route('/'),
             //'create' => Pages\CreateInscritoIndividual::route('/create'),
-            'edit' => Pages\EditInscritoIndividual::route('/{record}/edit'),
+            'edit' => EditInscritoIndividual::route('/{record}/edit'),
         ];
     }
 }

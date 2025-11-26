@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Admin\Resources\UserResource\Pages;
+namespace App\Filament\Admin\Resources\Users\Pages;
 
 use App\Models\User;
 use Filament\Actions;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
-use App\Filament\Admin\Resources\UserResource;
+use App\Filament\Admin\Resources\Users\UserResource;
 
 class EditUser extends EditRecord
 {
@@ -27,7 +27,7 @@ class EditUser extends EditRecord
                 ->label('Alterar Senha')
                 ->color('success')
                 ->icon('heroicon-o-key')
-                ->form([
+                ->schema([
                     TextInput::make('password')
                         ->label('Senha')
                         ->password()
