@@ -4,7 +4,7 @@
 PROGRAM_NAME="cliente-revivendo-ecc"
 SUPERVISOR_CONF="/etc/supervisor/conf.d/${PROGRAM_NAME}.conf"
 PHP_PATH="/usr/bin/php"
-APP_PATH="/home/eccformacao/htdocs/formacao.eccdiocesedeiguatu.com/ecc-formacao"
+APP_PATH="/home/eccrevivendo/htdocs/revivendo.eccdiocesedeiguatu.com/ecc-revivendo"
 
 # Verifica se está rodando como root
 if [ "$EUID" -ne 0 ]; then
