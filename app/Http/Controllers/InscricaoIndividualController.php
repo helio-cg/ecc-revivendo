@@ -27,6 +27,10 @@ class InscricaoIndividualController extends Controller
     {
         $inscricao = InscricaoIndividual::create($request->validated());
 
+        $inscricao->invoice()->create([
+            'valor' => 80.00,
+        ]);
+
         return redirect()->route('inscricao-individual.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');
     }
 

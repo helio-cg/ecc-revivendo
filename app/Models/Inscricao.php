@@ -29,4 +29,8 @@ class Inscricao extends Model
         return $this->belongsTo(Paroquia::class);
     }
 
+    public function invoice()
+    {
+        return $this->morphOne(Invoice::class, 'invoiceable');
+    }
 }

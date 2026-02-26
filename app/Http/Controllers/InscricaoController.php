@@ -28,6 +28,11 @@ class InscricaoController extends Controller
     {
         $inscricao = Inscricao::create($request->validated());
 
+        $inscricao->invoice()->create([
+            'valor' => 100.00,
+            'status' => 'pendente',
+        ]);
+
         return redirect()->route('inscricao.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');
     }
 

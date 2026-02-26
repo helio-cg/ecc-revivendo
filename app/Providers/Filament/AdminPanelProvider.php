@@ -32,6 +32,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->id('admin')
             ->path('admin')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->login(Login::class)
             ->profile()
             ->topNavigation()
@@ -44,7 +45,7 @@ class AdminPanelProvider extends PanelProvider
             ->font('Roboto')
             //->brandLogo(asset('img/logo.png'))
             //->brandLogoHeight('12rem')
-         //   ->theme(asset('css/filament/admin/theme.css'))
+            ->theme(asset('css/filament/admin/theme.css'))
             ->discoverResources(in: app_path('Filament/Admin/Resources'), for: 'App\\Filament\\Admin\\Resources')
             ->discoverPages(in: app_path('Filament/Admin/Pages'), for: 'App\\Filament\\Admin\\Pages')
             ->pages([
