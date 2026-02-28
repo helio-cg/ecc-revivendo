@@ -7,13 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Invoice extends Model
 {
     protected $fillable = [
+        'transactionID',
         'valor',
         'status',
-        'gateway',
-        'external_id',
-        'pix_qrcode',
-        'pix_copia_cola',
-        'pix_expira_em',
+        'paymentDate',
+        'invoiceUrl'
     ];
 
     public function invoiceable()

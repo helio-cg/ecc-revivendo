@@ -35,4 +35,9 @@ return [
         ],
     ],
 
+     'openpix' => [
+        'app_id' => env('OPENPIX_APP_ID', ''),
+        'base_uri' => env('OPENPIX_BASE_URI', 'https://api.openpix.com.br'),
+    ],
+
 ];

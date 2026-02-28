@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
 
+            $table->string('transactionID')->unique()->nullable();
+
             // relação polimórfica
             $table->morphs('invoiceable');
             // cria:
@@ -23,13 +25,8 @@ return new class extends Migration
             $table->decimal('valor', 10, 2);
             $table->string('status')->default('pendente');
 
-            $table->string('gateway')->nullable();
-            $table->string('external_id')->nullable();
-
-            // dados PIX
-            $table->text('pix_qrcode')->nullable();
-            $table->text('pix_copia_cola')->nullable();
-            $table->timestamp('pix_expira_em')->nullable();
+            $table->date('paymentDate')->nullable();
+            $table->string('invoiceUrl')->nullable();
 
             $table->timestamps();
         });

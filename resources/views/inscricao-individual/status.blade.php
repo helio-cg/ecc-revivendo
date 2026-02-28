@@ -21,7 +21,7 @@
 
         <div class="flex justify-between text-sm">
             <span class="text-gray-500">Nº do comprovante</span>
-            <span class="font-bold">#{{ $inscricao->id }}</span>
+            <span class="font-bold">#IND-{{ $inscricao->id }}</span>
         </div>
 
         <div class="flex justify-between text-sm">

@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\Paroquia;
-use App\Models\Inscricao;
-use Illuminate\Http\Request;
 use App\Http\Requests\CasalRequest;
+use App\Models\Inscricao;
 use App\Models\InscricaoIndividual;
+use App\Models\Paroquia;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Ramsey\Uuid\Uuid;
+use OpenPix\PhpSdk\Client;
 
 class InscricaoController extends Controller
 {
@@ -28,9 +30,29 @@ class InscricaoController extends Controller
     {
         $inscricao = Inscricao::create($request->validated());
 
-        $inscricao->invoice()->create([
-            'valor' => 100.00,
+        $invoiceTotal = 100.00; // valor da inscrição, pode ser dinâmico
+        $invoice = $inscricao->invoice()->create([
+            'valor' => $invoiceTotal,
             'status' => 'pendente',
+        ]);
+
+        $dadosCobrancaCliente = [
+            'correlationID' => Uuid::uuid7()->toString(),
+            'value' => $invoiceTotal * 100,
+            'additionalInfo' => [
+                [
+                    'key' => 'Número da Fatura',
+                    'value' => '#'.$invoice->id
+                ]
+            ],
+        ];
+
+        $openPix = app(Client::class);
+        $resposta = $openPix->charges()->create($dadosCobrancaCliente);
+
+        $invoice->update([
+            'transactionID' => $resposta['charge']['transactionID'],
+            'invoiceUrl' => $resposta['charge']['paymentLinkUrl']
         ]);
 
         return redirect()->route('inscricao.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');
