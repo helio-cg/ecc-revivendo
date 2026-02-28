@@ -28,7 +28,10 @@ class InscricaoController extends Controller
 
     public function store(CasalRequest $request)
     {
-        $inscricao = Inscricao::create($request->validated());
+        $telefone = $request->telefone;
+        $dados = $request->validated();
+
+        $inscricao = Inscricao::create($dados);
 
         $invoiceTotal = 100.00; // valor da inscrição, pode ser dinâmico
         $invoice = $inscricao->invoice()->create([
@@ -55,7 +58,7 @@ class InscricaoController extends Controller
             'invoiceUrl' => $resposta['charge']['paymentLinkUrl']
         ]);
 
-        return redirect()->route('inscricao.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');
+        return redirect()->route('consultar-inscricao.form', compact('telefone'))->with('success', 'Inscrição realizada com sucesso!');
     }
 /*
     public function consultar()

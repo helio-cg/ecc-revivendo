@@ -27,7 +27,10 @@ class InscricaoIndividualController extends Controller
 
     public function store(InscricaoIndividualRequest $request)
     {
-        $inscricao = InscricaoIndividual::create($request->validated());
+        $telefone = $request->telefone;
+        $dados = $request->validated();
+
+        $inscricao = InscricaoIndividual::create($dados);
 
         $invoiceTotal = 100.00; // valor da inscrição, pode ser dinâmico
         $invoice = $inscricao->invoice()->create([
@@ -54,7 +57,7 @@ class InscricaoIndividualController extends Controller
             'invoiceUrl' => $resposta['charge']['paymentLinkUrl']
         ]);
 
-        return redirect()->route('inscricao-individual.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');
+        return redirect()->route('consultar-inscricao.form', compact('telefone'))->with('success', 'Inscrição realizada com sucesso!');
     }
 /*
     public function status($telefone)

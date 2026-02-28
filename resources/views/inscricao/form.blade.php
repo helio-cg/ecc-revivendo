@@ -168,9 +168,27 @@
                         Telefone com DDD
                         <span class="text-red-500 text-xs">(Somente números)</span>
                     </label>
-                    <input type="number" name="telefone" required
+                    <input type="text" name="telefone" id="telefone" required
                         class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 transition"
-                        value="{{ old('telefone') }}">
+                        value="{{ old('telefone') }}"
+                        placeholder="(88) 9 9999-9999">
+                    <script>
+                        document.getElementById('telefone').addEventListener('input', function (e) {
+                            let v = e.target.value.replace(/\D/g, '');
+
+                            if (v.length > 11) v = v.slice(0,11);
+
+                            if (v.length <= 10) {
+                                v = v.replace(/(\d{2})(\d)/, "($1) $2")
+                                    .replace(/(\d{4})(\d)/, "$1-$2");
+                            } else {
+                                v = v.replace(/(\d{2})(\d)/, "($1) $2")
+                                    .replace(/(\d{5})(\d)/, "$1-$2");
+                            }
+
+                            e.target.value = v;
+                        });
+                        </script>
                 </div>
 
                 <div>

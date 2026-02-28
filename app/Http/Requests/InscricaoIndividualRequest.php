@@ -28,11 +28,20 @@ class InscricaoIndividualRequest extends FormRequest
             'tamanho_camisa' => 'required|string|max:255',
             'telefone' => [
                 'required',
-                'string',
-                'digits:11', // Garante exatamente 11 números
+                'digits_between:10,11', // Brasil fixo ou celular
                 'unique:inscricoes,telefone',
             ],
             'paroquia_id' => 'required|integer'
         ];
+
+
+    }
+    protected function prepareForValidation()
+    {
+        if ($this->telefone) {
+            $this->merge([
+                'telefone' => preg_replace('/\D/', '', $this->telefone),
+            ]);
+        }
     }
 }
