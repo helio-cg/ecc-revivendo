@@ -27,8 +27,12 @@ class InscricaoIndividualController extends Controller
 
     public function store(InscricaoIndividualRequest $request)
     {
+        $paroquia = Paroquia::where('id',$request->paroquia_id)->first();
         $telefone = $request->telefone;
         $dados = $request->validated();
+
+        $nome = $request->nome_usual;
+        $paroquias = $paroquia->name . ' de ' . $paroquia->city;
 
         $inscricao = InscricaoIndividual::create($dados);
 
@@ -43,8 +47,12 @@ class InscricaoIndividualController extends Controller
             'value' => $invoiceTotal * 100,
             'additionalInfo' => [
                 [
-                    'key' => 'Número da Fatura',
-                    'value' => '#'.$invoice->id
+                    'key' => 'Nome',
+                    'value' => $nome
+                ],
+                [
+                    'key' => 'Paróquia',
+                    'value' =>  $paroquias
                 ]
             ],
         ];
@@ -59,10 +67,5 @@ class InscricaoIndividualController extends Controller
 
         return redirect()->route('consultar-inscricao.form', compact('telefone'))->with('success', 'Inscrição realizada com sucesso!');
     }
-/*
-    public function status($telefone)
-    {
-        $inscricao = InscricaoIndividual::where('telefone', $telefone)->firstOrFail();
-        return view('inscricao-individual.status', compact('inscricao'));
-    }*/
+
 }

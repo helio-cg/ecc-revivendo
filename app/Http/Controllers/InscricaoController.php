@@ -28,8 +28,12 @@ class InscricaoController extends Controller
 
     public function store(CasalRequest $request)
     {
+        $paroquia = Paroquia::where('id',$request->paroquia_id)->first();
         $telefone = $request->telefone;
         $dados = $request->validated();
+
+        $nome = $request->nome_usual_ele . ' e ' . $request->nome_usual_ela;
+        $paroquias = $paroquia->name . ' de ' . $paroquia->city;
 
         $inscricao = Inscricao::create($dados);
 
@@ -44,8 +48,12 @@ class InscricaoController extends Controller
             'value' => $invoiceTotal * 100,
             'additionalInfo' => [
                 [
-                    'key' => 'Número da Fatura',
-                    'value' => '#'.$invoice->id
+                    'key' => 'Nome',
+                    'value' => $nome
+                ],
+                [
+                    'key' => 'Paróquia',
+                    'value' =>  $paroquias
                 ]
             ],
         ];
@@ -60,39 +68,5 @@ class InscricaoController extends Controller
 
         return redirect()->route('consultar-inscricao.form', compact('telefone'))->with('success', 'Inscrição realizada com sucesso!');
     }
-/*
-    public function consultar()
-    {
-        return view('inscricao.consultar');
-    }
 
-    public function buscar(Request $request)
-    {
-        $request->validate([
-            'telefone' => 'required|integer',
-            'tipo' => 'required'
-        ]);
-
-        if($request->tipo == 'casal'){
-            $inscricao = Inscricao::where('telefone', $request->telefone)->first();
-        }else{
-            $inscricao = InscricaoIndividual::where('telefone', $request->telefone)->first();
-        }
-
-        if (!$inscricao) {
-            return redirect()->back()->with('error', 'Inscrição não encontrada.');
-        }
-
-        if($request->tipo == 'casal'){
-            return view('inscricao.status', compact('inscricao'));
-        }
-
-        return view('inscricao-individual.status', compact('inscricao'));
-    }
-
-    public function status($telefone)
-    {
-        $inscricao = Inscricao::where('telefone', $telefone)->firstOrFail();
-        return view('inscricao.status', compact('inscricao'));
-    }*/
 }

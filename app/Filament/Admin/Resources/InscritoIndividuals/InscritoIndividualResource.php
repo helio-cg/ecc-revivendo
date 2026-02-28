@@ -2,30 +2,32 @@
 
 namespace App\Filament\Admin\Resources\InscritoIndividuals;
 
-use Filament\Schemas\Schema;
-use Filament\Actions\Action;
-use Filament\Actions\EditAction;
-use Filament\Actions\DeleteAction;
-use Filament\Actions\BulkActionGroup;
-use App\Filament\Admin\Resources\InscritoIndividuals\Pages\ListInscritoIndividuals;
-use App\Filament\Admin\Resources\InscritoIndividuals\Pages\EditInscritoIndividual;
-use Carbon\Carbon;
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Tables\Table;
 use App\Enums\InvoiceStatus;
-use Filament\Resources\Resource;
-use App\Models\InscritoIndividual;
-use App\Models\InscricaoIndividual;
-use Filament\Forms\Components\Radio;
-use Filament\Forms\Components\Select;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Tables\Filters\SelectFilter;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Admin\Resources\InscritoIndividualResource\Pages;
 use App\Filament\Admin\Resources\InscritoIndividualResource\RelationManagers;
+use App\Filament\Admin\Resources\InscritoIndividuals\Pages\EditInscritoIndividual;
+use App\Filament\Admin\Resources\InscritoIndividuals\Pages\ListInscritoIndividuals;
+use App\Models\InscricaoIndividual;
+use App\Models\InscritoIndividual;
+use Carbon\Carbon;
+use Filament\Actions\Action;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Forms;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\TextInput;
+use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
+use Filament\Tables;
+use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\HtmlString;
 
 class InscritoIndividualResource extends Resource
 {
@@ -74,18 +76,17 @@ class InscritoIndividualResource extends Resource
                 TextColumn::make('paroquia.name')
                     ->label('Paróquia')
                     ->formatStateUsing(fn ($record) => "{$record->paroquia->name} - {$record->paroquia->city}"),
-                TextColumn::make('status_pagamento')
+                BadgeColumn::make('invoice.status')
                     ->label('Status do Pagamento')
-                    ->sortable()
-                    ->badge()
-                    ->color(fn ($record) => match ($record->status_pagamento) {
-                        'Pago' => 'success',  // Verde
-                        'Pendente' => 'warning', // Amarelo
-                        'Cancelado' => 'danger', // Vermelho
-                        'Cortesia' => 'info',
-                        default => 'secondary', // Cinza para outros casos
-                    }),
-                TextColumn::make('paymentDate')
+                    ->getStateUsing(fn ($record) => $record->invoice?->status ?? 'sem_invoice')
+                    ->colors([
+                        'success' => 'Pago',
+                        'warning' => 'Cortesia',
+                        'danger' => 'Cancelado',
+                        'gray' => 'Pendente',
+                    ]),
+
+                TextColumn::make('invoice.paymentDate')
                     ->label('Pago em')
                     ->date('d/m/Y'),
                 TextColumn::make('created_at')
@@ -93,7 +94,7 @@ class InscritoIndividualResource extends Resource
                     ->date('d/m/Y h:m:i')
             ])
             ->filters([
-                SelectFilter::make('status')
+                SelectFilter::make('invoice.status')
                     ->label('Filtrar por Paróquia')
                     ->searchable()
                     ->preload()
@@ -109,13 +110,18 @@ class InscritoIndividualResource extends Resource
                     ->color('success')
                     ->requiresConfirmation()
                     ->modalHeading("Confirmar Pagamento?")
-                    ->modalDescription(fn ($record) => "{$record->nome} - {$record->paroquia->name} de {$record->paroquia->city}")
+                    ->modalDescription(fn ($record) =>
+                    new HtmlString(
+                        "<b>{$record->nome}</b> <br>
+                         {$record->paroquia->name} de {$record->paroquia->city}")
+                    )
                     ->action(fn ($record) => $record->update([
                         'paymentDate' => Carbon::now(),
                         'status_pagamento' => 'Pago',
+                        'forma_de_pagamento' => 'Manual ou Cartão'
                     ]))
                     ->successNotificationTitle('Pagamento confirmado com sucesso!')
-                    ->hidden(fn ($record) => $record->status_pagamento === 'Pago' OR $record->status_pagamento === 'Cortesia'),
+                    ->hidden(fn ($record) => $record->invoice->status === 'Pago' OR $record->invoice->status === 'Cortesia'),
                 EditAction::make()
                     ->label('Editar')
                     ->iconButton(),

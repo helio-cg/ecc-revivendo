@@ -11,7 +11,8 @@ class Invoice extends Model
         'valor',
         'status',
         'paymentDate',
-        'invoiceUrl'
+        'invoiceUrl',
+        'forma_de_pagamento'
     ];
 
     public function invoiceable()

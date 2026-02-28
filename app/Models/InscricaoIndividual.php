@@ -11,8 +11,6 @@ class InscricaoIndividual extends Model
         'nome_usual',
         'tamanho_camisa',
         'telefone',
-        'paymentDate',
-        'status_pagamento',
         'paroquia_id'
     ];
 

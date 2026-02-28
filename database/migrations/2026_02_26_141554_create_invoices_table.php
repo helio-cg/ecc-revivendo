@@ -27,6 +27,7 @@ return new class extends Migration
 
             $table->date('paymentDate')->nullable();
             $table->string('invoiceUrl')->nullable();
+            $table->string('forma_de_pagamento')->nullable();
 
             $table->timestamps();
         });

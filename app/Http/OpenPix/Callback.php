@@ -12,10 +12,10 @@ class Callback
     // Cobrança criada
     public function chargeCreated(Request $request)
     {
-        Log::info('OpenPix Callback', [
+     /*   Log::info('OpenPix Callback', [
             'event' => $request->input('event'),
             'data' => $request->all(),
-        ]);
+        ]);*/
 
         return $request;
     }
@@ -32,6 +32,7 @@ class Callback
                 $transaction->update([
                     'status' => InvoiceStatus::PAID->value,
                     'paymentDate' => date('Y-m-d'),
+                    'forma_de_pahamento' => 'Pix'
                 ]);
             } else {
                 $transaction->update([
