@@ -7,7 +7,7 @@
 
 <body class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100 flex items-center justify-center p-4 font-sans">
 
-<div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl overflow-hidden">
+<div class="w-full max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden">
 
     <!-- HEADER -->
     <div class="bg-indigo-600 text-white p-6 text-center">
@@ -45,7 +45,7 @@
             </div>
 
             <div>
-                <p class="text-gray-500">Camisa</p>
+                <p class="text-gray-500">Camisa Tamanho</p>
                 <p>{{ $inscricao->tamanho_camisa }}</p>
             </div>
         </div>

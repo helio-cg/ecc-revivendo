@@ -57,7 +57,7 @@ class InscricaoController extends Controller
 
         return redirect()->route('inscricao.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');
     }
-
+/*
     public function consultar()
     {
         return view('inscricao.consultar');
@@ -91,5 +91,5 @@ class InscricaoController extends Controller
     {
         $inscricao = Inscricao::where('telefone', $telefone)->firstOrFail();
         return view('inscricao.status', compact('inscricao'));
-    }
+    }*/
 }

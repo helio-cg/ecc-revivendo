@@ -56,10 +56,10 @@ class InscricaoIndividualController extends Controller
 
         return redirect()->route('inscricao-individual.status', ['telefone' => $inscricao->telefone])->with('success', 'Inscrição realizada com sucesso!');
     }
-
+/*
     public function status($telefone)
     {
         $inscricao = InscricaoIndividual::where('telefone', $telefone)->firstOrFail();
         return view('inscricao-individual.status', compact('inscricao'));
-    }
+    }*/
 }
