@@ -13,6 +13,8 @@ return [
     |
     */
 
+    'incricaoValor' => '1.00',
+
     'name' => env('APP_NAME', 'XXIII Revivendo'),
 
     /*

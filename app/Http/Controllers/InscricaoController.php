@@ -37,7 +37,7 @@ class InscricaoController extends Controller
 
         $inscricao = Inscricao::create($dados);
 
-        $invoiceTotal = 100.00; // valor da inscrição, pode ser dinâmico
+        $invoiceTotal = config('app.incricaoValor'); // valor da inscrição, pode ser dinâmico
         $invoice = $inscricao->invoice()->create([
             'valor' => $invoiceTotal,
             'status' => 'pendente',
