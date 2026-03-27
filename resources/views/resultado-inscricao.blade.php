@@ -91,7 +91,7 @@
         <!-- STATUS -->
         <div class="text-center mt-4">
 
-            @if($inscricao->invoice->status == 'Pago' || $inscricao->status_pagamento == 'Cortesia')
+            @if($inscricao->status_pagamento == 'Pago' || $inscricao->status_pagamento == 'Cortesia')
                 <p class="text-green-600 text-2xl font-bold">PAGAMENTO CONFIRMADO ✅</p>
             @else
                 <p class="text-yellow-600 text-xl font-bold">PAGAMENTO PENDENTE</p>
@@ -100,7 +100,7 @@
         </div>
 
         <!-- PIX -->
-        @if($inscricao->invoice->status == 'Pendente')
+        @if($inscricao->status_pagamento == 'Pendente')
         <div class="mt-6 flex justify-center">
             @if($inscricao->invoice->invoiceUrl)
                 <div class="w-full max-w-md bg-white shadow-lg rounded-2xl p-6 border border-gray-100">
