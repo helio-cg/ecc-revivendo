@@ -19,8 +19,8 @@ Route::post('/inscricao', [InscricaoController::class, 'store'])->name('inscrica
 Route::get('/status-inscricao/{telefone}', [InscricaoController::class, 'status'])->name('inscricao.status');
 
 /* Individual */
-//Route::get('/inscricao-individual', [InscricaoIndividualController::class, 'create'])->name('inscricao-individual.form');
-//Route::post('/inscricao-individual', [InscricaoIndividualController::class, 'store'])->name('inscricao-individual.store');
+Route::get('/inscricao-individual-secret', [InscricaoIndividualController::class, 'create'])->name('inscricao-individual.form');
+Route::post('/inscricao-individual', [InscricaoIndividualController::class, 'store'])->name('inscricao-individual.store');
 
 //Route::get('/status-inscricao-individual/{telefone}', [InscricaoIndividualController::class, 'status'])->name('inscricao-individual.status');
 
