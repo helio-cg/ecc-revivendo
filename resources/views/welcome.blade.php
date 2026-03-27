@@ -39,14 +39,14 @@
 
         @php
             $hoje = strtotime(now());
-            $dataLimite = DateTime::createFromFormat('d/m/Y', '02/08/2026')->getTimestamp();
+            $dataLimite = DateTime::createFromFormat('d/m/Y', '25/07/2026')->getTimestamp();
 
             $totalPago = \App\Models\Inscricao::where('status_pagamento','Pago')->count();
            // dd($totalPago);
         @endphp
 
         {{--@if($hoje > $dataLimite)--}}
-        @if($totalPago >= '1000')
+        @if($totalPago >= '1000' OR $hoje > $dataLimite)
 
             <div class="py-6">
                 <h2 class="text-2xl font-bold text-red-600">
@@ -58,7 +58,7 @@
 
             <p class="text-md text-gray-700 mb-2">
                 O evento tem apenas 1000 vagas disponíveis.<br>
-                As inscrições serão encerradas assim que o limite for atingido.<br>
+                As inscrições serão encerradas em 25/07/2026 ou assim que o limite for atingido.<br>
                 Garanta sua vaga o quanto antes! Há {{ $totalPago }} inscrições confirmadas.
             </p>
 
@@ -105,7 +105,7 @@
 </div>
 
 <script>
-    const eventDate = new Date("2026-08-03T08:00:00").getTime();
+    const eventDate = new Date("2026-08-02T08:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
