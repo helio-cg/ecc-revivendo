@@ -36,7 +36,7 @@ class Callback
                     'forma_de_pahamento' => 'Pix'
                 ]);
                 // Atualiza o modelo polimórfico (User, Paróquia, etc.)
-                $transaction->invoiceable?->update([
+                $transaction->invoice?->update([
                     'status_pagamento' => InvoiceStatus::PAID->value,
                 ]);
             } else {
