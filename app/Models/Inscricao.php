@@ -20,7 +20,8 @@ class Inscricao extends Model
         'tamanho_camisa_ela',
         'telefone',
         'paroquia_id',
-        'status_pagamento'
+        'status_pagamento',
+        'paymentDate'
     ];
 
     public function paroquia()

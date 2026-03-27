@@ -11,7 +11,9 @@ class InscricaoIndividual extends Model
         'nome_usual',
         'tamanho_camisa',
         'telefone',
-        'paroquia_id'
+        'paroquia_id',
+        'status_pagamento',
+        'paymentDate'
     ];
 
     public function paroquia()
