@@ -32,12 +32,13 @@ class Callback
                 $transaction->update([
                     'status' => InvoiceStatus::PAID->value,
                     'paymentDate' => date('Y-m-d'),
-                    'forma_de_pahamento' => 'Pix'
+                    'forma_de_pagamento' => 'Pix'
                 ]);
                 // Atualiza o modelo polimórfico (User, Paróquia, etc.)
                 if ($transaction->invoiceable) {
                     $transaction->invoiceable->update([
                         'status_pagamento' => InvoiceStatus::PAID->value,
+                        'paymentDate' => date('Y-m-d'),
                     ]);
                    
                 }
