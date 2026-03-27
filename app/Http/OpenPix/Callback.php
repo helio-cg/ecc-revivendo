@@ -36,8 +36,7 @@ class Callback
                     'forma_de_pahamento' => 'Pix'
                 ]);
                 // Atualiza o modelo polimórfico (User, Paróquia, etc.)
-                $user = Inscricao::where('id',$transaction->invoiceable_id)->first();
-                $user->update([
+                $transaction->invoiceable?->update([
                     'status_pagamento' => InvoiceStatus::PAID->value,
                 ]);
             } else {
