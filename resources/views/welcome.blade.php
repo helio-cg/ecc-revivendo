@@ -59,11 +59,11 @@
             <p class="text-md text-gray-700 mb-2">
                 O evento tem apenas 1000 vagas disponíveis.<br>
                 As inscrições serão encerradas assim que o limite for atingido.<br>
-                Garanta sua vaga o quanto antes!
+                Garanta sua vaga o quanto antes! Há {{ $totalPago }} inscrições confirmadas.
             </p>
 
             <p class="text-gray-600 mb-8 mt-8">
-               Data: Domingo, 02 de Agosto de 2025 - Iguatu - CE
+               Data: Domingo, 02 de Agosto de 2026 - Iguatu - CE
             </p>
 
             <div class="grid gap-4 md:grid-cols-1 mb-6">
