@@ -21,7 +21,10 @@ class ListInscritoIndividuals extends ListRecords
     {
         return [
             //Actions\CreateAction::make(),
-             Action::make('Total Geral Individual')
+            Action::make('Registrar Inscrição Individual')
+                ->url(route('inscricao-individual.form'))
+                ->openUrlInNewTab(),
+            Action::make('Total Geral Individual')
                 ->label('Total Geral Individual')
                 ->icon('heroicon-o-document-text')
                 ->color('primary')
