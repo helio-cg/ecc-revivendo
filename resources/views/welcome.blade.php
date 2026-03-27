@@ -88,18 +88,35 @@
         </a>
 
         <!-- Countdown -->
-        <div class="mt-10">
-            <p class="text-gray-700 font-medium mb-4">
-                O evento começa em:
-            </p>
+<div class="mt-12 text-center">
+    <p class="text-gray-500 text-sm uppercase tracking-widest mb-6">
+        O evento começa em
+    </p>
 
-            <div id="countdown" class="grid grid-cols-4 gap-4 max-w-md mx-auto text-white font-bold text-lg">
-                <div class="bg-indigo-600 rounded-xl py-4 shadow-lg">00d</div>
-                <div class="bg-purple-600 rounded-xl py-4 shadow-lg">00h</div>
-                <div class="bg-pink-600 rounded-xl py-4 shadow-lg">00m</div>
-                <div class="bg-red-500 rounded-xl py-4 shadow-lg">00s</div>
-            </div>
+    <div id="countdown" class="flex justify-center gap-6">
+        
+        <div class="flex flex-col items-center">
+            <span class="text-4xl font-bold text-gray-900">00</span>
+            <span class="text-xs text-gray-400 mt-1">Dias</span>
         </div>
+
+        <div class="flex flex-col items-center">
+            <span class="text-4xl font-bold text-gray-900">00</span>
+            <span class="text-xs text-gray-400 mt-1">Horas</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <span class="text-4xl font-bold text-gray-900">00</span>
+            <span class="text-xs text-gray-400 mt-1">Min</span>
+        </div>
+
+        <div class="flex flex-col items-center">
+            <span class="text-4xl font-bold text-gray-900">00</span>
+            <span class="text-xs text-gray-400 mt-1">Seg</span>
+        </div>
+
+    </div>
+</div>
 
     </div>
 </div>
