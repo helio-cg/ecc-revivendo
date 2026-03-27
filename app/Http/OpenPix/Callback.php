@@ -3,6 +3,7 @@
 namespace App\Http\OpenPix;
 
 use App\Enums\InvoiceStatus;
+use App\Models\Inscricao;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -35,11 +36,10 @@ class Callback
                     'forma_de_pahamento' => 'Pix'
                 ]);
                 // Atualiza o modelo polimórfico (User, Paróquia, etc.)
-                if ($transaction->invoiceable) {
-                    $transaction->invoiceable->update([
-                        'status_pagamento' => InvoiceStatus::PAID->value,
-                    ]);
-                }
+                $user = Inscricao::where('id',$transaction->invoiceable_id)->first();
+                $user->update([
+                    'status_pagamento' => InvoiceStatus::PAID->value,
+                ]);
             } else {
                 $transaction->update([
                     'status' => $status,
