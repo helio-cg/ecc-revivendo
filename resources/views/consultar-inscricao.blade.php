@@ -4,13 +4,16 @@
     <title>Consultar Inscrição</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<body class="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-100 flex items-center justify-center p-4 font-sans">
 
-<div class="bg-white p-6 rounded-xl shadow w-full max-w-md">
+<div class="w-full max-w-xl bg-white rounded-2xl shadow-xl overflow-hidden p-6">
 
-    <h2 class="text-xl font-bold mb-4 text-center">
-        Consultar Inscrição
-    </h2>
+    <!-- HEADER -->
+    <div class="bg-indigo-600 text-white p-6 text-center mb-10">
+        <img src="/img/logo.png" class="mx-auto w-20 mb-2">
+        <h1 class="text-2xl font-bold">Consultar Inscrição</h1>
+        <p class="text-sm opacity-80">{{ config('app.name') }}</p>
+    </div>
 
     @if(session('error'))
     <div class="bg-red-100 border border-red-300 text-red-700 p-4 rounded-xl mb-6 text-center font-semibold shadow-sm">

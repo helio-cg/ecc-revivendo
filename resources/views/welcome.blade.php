@@ -39,10 +39,14 @@
 
         @php
             $hoje = strtotime(now());
-            $dataLimite = DateTime::createFromFormat('d/m/Y', '01/08/2026')->getTimestamp();
+            $dataLimite = DateTime::createFromFormat('d/m/Y', '02/08/2026')->getTimestamp();
+
+            $totalPago = \App\Models\Inscricao::where('status_pagamento','Pago')->count();
+           // dd($totalPago);
         @endphp
 
-        @if($hoje > $dataLimite)
+        {{--@if($hoje > $dataLimite)--}}
+        @if($totalPago >= '1000')
 
             <div class="py-6">
                 <h2 class="text-2xl font-bold text-red-600">
@@ -52,27 +56,28 @@
 
         @else
 
-            <p class="text-lg font-semibold text-gray-700 mb-2">
-                Inscrições abertas até 23/07/2025
+            <p class="text-md text-gray-700 mb-2">
+                O evento tem apenas 1000 vagas disponíveis.<br>
+                As inscrições serão encerradas assim que o limite for atingido.<br>
+                Garanta sua vaga o quanto antes!
             </p>
 
-            <p class="text-gray-600 mb-8">
-                Domingo, 03 de Agosto de 2025 <br>
-                Iguatu - CE
+            <p class="text-gray-600 mb-8 mt-8">
+               Data: Domingo, 02 de Agosto de 2025 - Iguatu - CE
             </p>
 
-            <div class="grid gap-4 md:grid-cols-2 mb-6">
+            <div class="grid gap-4 md:grid-cols-1 mb-6">
 
                 <a href="/inscricao"
                    class="group bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold py-4 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300">
-                    👩‍❤️‍👨 Inscrição CASAL
+                    👩‍❤️‍👨 Fazer Inscrição
                 </a>
-
+{{-- 
                 <a href="/inscricao-individual"
                    class="group bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-4 rounded-xl shadow-lg hover:scale-105 hover:shadow-2xl transition-all duration-300">
                     🧑 Inscrição INDIVIDUAL
                 </a>
-
+ --}}
             </div>
 
         @endif
