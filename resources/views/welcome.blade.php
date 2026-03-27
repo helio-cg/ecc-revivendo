@@ -63,7 +63,7 @@
             </p>
 
             <p class="text-gray-600 mb-8 mt-8">
-               Data: Domingo, 02 de Agosto de 2026 - Iguatu - CE
+               O encontro será no domingo, 02 de Agosto de 2026 na cidade de Iguatu - CE
             </p>
 
             <div class="grid gap-4 md:grid-cols-1 mb-6">
