@@ -37,7 +37,7 @@ class Callback
                 // Atualiza o modelo polimórfico (User, Paróquia, etc.)
                 if ($transaction->invoiceable) {
                     $transaction->invoiceable->update([
-                        'status' => InvoiceStatus::PAID->value,
+                        'status_pagamento' => InvoiceStatus::PAID->value,
                     ]);
                 }
             } else {
