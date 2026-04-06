@@ -126,6 +126,12 @@
                     </p>
 
                 </div>
+            @else
+                <div class="w-full max-w-md bg-yellow-50 border-l-4 border-yellow-400 p-4">
+                    <p class="text-yellow-700 text-center">
+                        ⚠️ O link de pagamento ainda não está disponível. Por favor, aguarde.
+                    </p>
+                </div>
             @endif
         </div>
         @endif
