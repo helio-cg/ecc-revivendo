@@ -1,0 +1,43 @@
+# MYSQL_ROOT_PASSWORD vem da variavel de ambiente dokploy
+# docker network inspect global-net >/dev/null 2>&1 || docker network create global-net (Caso a rede global-net não exista, crie-a com esse comando)
+services:
+  mysql:
+    image: mysql:5.7
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - global-net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mysql
+      PMA_USER: root
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    depends_on:
+      - mysql
+    networks:
+      - global-net
+  
+  redis:
+    image: 'redis:alpine'
+    restart: always
+    ports:
+      - '6379:6379'
+    networks:
+      - global-net
+
+volumes:
+  db_data:
+
+networks:
+  global-net:
+    external: true
