@@ -66,6 +66,7 @@ class InscritoResource extends Resource
                             'M' => 'M',
                             'G' => 'G',
                             'GG' => 'GG',
+                            'XG' => 'XG',
                             'EXG' => 'EXG',
                             'EXGG' => 'EXGG',
                         ])
@@ -87,6 +88,7 @@ class InscritoResource extends Resource
                             'M' => 'M',
                             'G' => 'G',
                             'GG' => 'GG',
+                            'XG' => 'XG',
                             'EXG' => 'EXG',
                             'EXGG' => 'EXGG',
                         ])
