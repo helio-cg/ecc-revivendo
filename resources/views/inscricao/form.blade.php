@@ -107,7 +107,7 @@
                             <select name="tamanho_camisa_ele"
                                 class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-indigo-500 transition">
                                 <option value="">Selecione</option>
-                                @foreach (['PP','P','M','G','GG','EXG','EXGG'] as $tamanho)
+                                @foreach (['PP','P','M','G','XG','GG','EXG','EXGG'] as $tamanho)
                                     <option value="{{ $tamanho }}" {{ old('tamanho_camisa_ele') == $tamanho ? 'selected' : '' }}>
                                         {{ $tamanho }}
                                     </option>
@@ -148,7 +148,7 @@
                             <select name="tamanho_camisa_ela"
                                 class="w-full rounded-xl border border-gray-300 px-4 py-3 focus:ring-2 focus:ring-pink-500 transition">
                                 <option value="">Selecione</option>
-                                @foreach (['PP','P','M','G','GG','EXG','EXGG'] as $tamanho)
+                                @foreach (['PP','P','M','G','XG','GG','EXG','EXGG'] as $tamanho)
                                     <option value="{{ $tamanho }}" {{ old('tamanho_camisa_ela') == $tamanho ? 'selected' : '' }}>
                                         {{ $tamanho }}
                                     </option>
