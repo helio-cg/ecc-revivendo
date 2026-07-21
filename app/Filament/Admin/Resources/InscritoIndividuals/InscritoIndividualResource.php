@@ -115,13 +115,22 @@ class InscritoIndividualResource extends Resource
                         "<b>{$record->nome}</b> <br>
                          {$record->paroquia->name} de {$record->paroquia->city}")
                     )
-                    ->action(fn ($record) => $record->update([
-                        'paymentDate' => Carbon::now(),
-                        'status_pagamento' => 'Pago',
-                        'forma_de_pagamento' => 'Manual ou Cartão'
-                    ]))
+                    ->action(function ($record) {
+                        $record->update([
+                            'paymentDate' => Carbon::now(),
+                            'status_pagamento' => 'Pago',
+                        ]);
+
+                        if ($record->invoice) {
+                            $record->invoice->update([
+                                'status' => 'Pago',
+                                'paymentDate' => Carbon::now(),
+                                'forma_de_pagamento' => 'Manual ou Cartão',
+                            ]);
+                        }
+                    })
                     ->successNotificationTitle('Pagamento confirmado com sucesso!')
-                    ->hidden(fn ($record) => $record->invoice->status === 'Pago' OR $record->invoice->status === 'Cortesia'),
+                    ->hidden(fn ($record) => $record->invoice && in_array($record->invoice->status, ['Pago', 'Cortesia'])),
                 EditAction::make()
                     ->label('Editar')
                     ->iconButton(),
