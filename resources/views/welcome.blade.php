@@ -45,13 +45,22 @@
            // dd($totalPago);
         @endphp
 
-        {{--@if($hoje > $dataLimite)--}}
         @if($totalPago >= '1000' OR $hoje > $dataLimite)
 
             <div class="py-6">
-                <h2 class="text-2xl font-bold text-red-600">
+                <h2 class="text-2xl font-bold text-red-600 mb-4">
                     Inscrições encerradas
                 </h2>
+                <p class="text-gray-700 mb-4">
+                    Olá! As inscrições para o <b>XXIII Revivendo - ECC</b> foram encerradas.<br>
+                    Agradecemos a todos que se inscreveram e contamos com a presença de vocês!
+                </p>
+                <p class="text-gray-600 mb-4">
+                    O encontro será no domingo, <b>02 de Agosto de 2026</b> na cidade de <b>Iguatu - CE</b>.
+                </p>
+                <p class="text-gray-500 text-sm">
+                    Em caso de dúvidas, entre em contato com a organização.
+                </p>
             </div>
 
         @else
