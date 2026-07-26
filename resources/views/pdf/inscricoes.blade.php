@@ -96,15 +96,18 @@
 </head>
 <body>
     <h1>{{ $paroquia->name }} - {{ $paroquia->city }}</h1>
+    <p style="margin: 0; color: #666; font-size: 13px;">Camisas somadas com status: <b style="color: green;">Pago</b> e <b style="color: #e67e22;">Cortesia</b></p>
     <h2>Camisas</h2>
     <div class="cam">
+    @php $itens = []; @endphp
     @foreach ($resultado as $tamanho => $quantidade)
         @if ($quantidade > 0)
-            <b>{{ $tamanho }}</b>: {{ $quantidade }} {{ $quantidade == 1 ? 'camisa' : 'camisas' }} -
+            @php $itens[] = "<b>{$tamanho}</b>: {$quantidade} " . ($quantidade == 1 ? 'camisa' : 'camisas'); @endphp
         @endif
     @endforeach
-    @if ($total > 0)
-        <b>Total:</b> {{ $total }} {{ $total == 1 ? 'camisa' : 'camisas' }}
+    @if (count($itens) > 0)
+        {!! implode(' - ', $itens) !!}
+        <br><b>Total:</b> {{ $total }} {{ $total == 1 ? 'camisa' : 'camisas' }}
     @else
         Nenhuma camisa registrada.
     @endif

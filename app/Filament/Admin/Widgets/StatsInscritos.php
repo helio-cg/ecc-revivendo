@@ -23,7 +23,7 @@ class StatsInscritos extends ChartWidget
             )
             ->perDay()
             ->count();
-        $data2 = Trend::query(Inscricao::where('status_pagamento','pago'))
+        $data2 = Trend::query(Inscricao::whereIn('status_pagamento', ['Pago', 'Cortesia']))
             ->dateColumn('paymentDate')
             ->between(
                 start: now()->subDays(30),

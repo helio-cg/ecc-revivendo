@@ -1,5 +1,11 @@
-
-<h2>Total de camisas com status pago, costersia e pendente. (VIÚVOS)</h2>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Total Geral Individual</title>
+</head>
+<body>
+<h2>Total de camisas - <span style="color: green;">Pago</span> e <span style="color: #e67e22;">Cortesia</span> (INDIVIDUAIS)</h2>
 <table border="1" cellpadding="5" cellspacing="0">
     <thead>
         <tr>
@@ -31,3 +37,5 @@
         </tr>
     </tbody>
 </table>
+</body>
+</html>

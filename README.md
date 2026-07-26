@@ -10,3 +10,7 @@ docker run --rm \
 -w /var/www/html \
 laravelsail/php84-composer:latest \
 composer install --ignore-platform-reqs
+
+- inite opencode
+- criar factory ara gerar dados
+- gerar pdf está somando errado

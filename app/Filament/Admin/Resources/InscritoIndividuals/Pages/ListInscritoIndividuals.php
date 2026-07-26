@@ -58,27 +58,17 @@ class ListInscritoIndividuals extends ListRecords
 
     public static function gerarPdf($paroquiaId, $status)
     {
-        $tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'EXG', 'EXGG'];
+        $tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'XG', 'EXG', 'EXGG'];
         $resultado = [];
         $total=0;
 
         foreach ($tamanhos as $tamanho) {
             $quantidade = InscricaoIndividual::where('paroquia_id', $paroquiaId)
-                //->whereIn('status_pagamento', ['Pago', 'Cortesia'])
                 ->whereIn('status_pagamento', (array) $status)
                 ->where('tamanho_camisa', $tamanho)
-               /* ->where(function ($query) use ($tamanho) {
-                    $query->where('tamanho_camisa_ele', $tamanho)
-                        ->orWhere('tamanho_camisa_ela', $tamanho);
-                })*/
                 ->count();
 
-            // Adiciona ao valor já existente
-          /*  if (isset($resultado[$tamanho])) {
-                $resultado[$tamanho] += $quantidade;
-            } else {
-                $resultado[$tamanho] = $quantidade;
-            }*/
+            $resultado[$tamanho] = $quantidade;
             $total += $quantidade;
         }
 
@@ -100,7 +90,7 @@ class ListInscritoIndividuals extends ListRecords
 
     public static function gerarPdfGeralIndividuais()
     {
-        $tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'EXG', 'EXGG'];
+        $tamanhos = ['PP', 'P', 'M', 'G', 'GG', 'XG', 'EXG', 'EXGG'];
         $paroquias = Paroquia::all();
 
         $tabela = [];
@@ -113,7 +103,7 @@ class ListInscritoIndividuals extends ListRecords
 
             foreach ($tamanhos as $tamanho) {
                 $quantidade = InscricaoIndividual::where('paroquia_id', $paroquia->id)
-                   // ->whereIn('status_pagamento', (array)$status)
+                    ->whereIn('status_pagamento', ['Pago', 'Cortesia'])
                     ->where('tamanho_camisa', $tamanho)
                     ->count();
 

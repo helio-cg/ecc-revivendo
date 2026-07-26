@@ -3,9 +3,11 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class InscricaoIndividual extends Model
 {
+    use HasFactory;
     protected $fillable = [
         'nome',
         'nome_usual',

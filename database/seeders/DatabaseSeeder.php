@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Inscricao;
+use App\Models\InscricaoIndividual;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,8 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
         $this->call([
             ParoquiaSeeder::class,
         ]);
@@ -23,6 +22,13 @@ class DatabaseSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'password' => 'password'
+        ]);
+
+        Inscricao::factory(500)->create();
+
+        InscricaoIndividual::factory()->create([
+            'nome' => 'Maria Silva',
+            'nome_usual' => 'Maria',
         ]);
     }
 }
