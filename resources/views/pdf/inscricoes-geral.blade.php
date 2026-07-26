@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Total Geral de Casais</title>
     <style>
-        body { font-size: 10px; margin: 4px; font-family: Arial, sans-serif; }
-        h2 { font-size: 13px; margin: 4px 0; }
-        table { width: 100%; border-collapse: collapse; font-size: 9px; }
-        th, td { padding: 2px 4px; border: 1px solid #999; }
-        th { background: #3498db; color: white; font-size: 9px; }
+        body { font-size: 14px; margin: 4px; font-family: Arial, sans-serif; }
+        h2 { font-size: 18px; margin: 4px 0; }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        th, td { padding: 6px 6px; border: 1px solid #999; }
+        th { background: #3498db; color: white; font-size: 14px; }
     </style>
 </head>
 <body>
