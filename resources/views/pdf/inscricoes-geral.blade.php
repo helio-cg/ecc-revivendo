@@ -12,7 +12,7 @@
     </style>
 </head>
 <body>
-<h2>Total de camisas - <span style="color: green;">Pago</span> e <span style="color: #e67e22;">Cortesia</span> (CASAIS)</h2>
+<h2>Total de camisas - <span style="color: green;">Pago</span>, <span style="color: #e67e22;">Cortesia</span> e <span style="color: #3498db;">Pendente</span> (CASAIS)</h2>
 <table>
     <thead>
         <tr>

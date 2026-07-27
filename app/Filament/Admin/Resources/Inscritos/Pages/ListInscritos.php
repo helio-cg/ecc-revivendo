@@ -112,12 +112,12 @@ class ListInscritos extends ListRecords
 
             foreach ($tamanhos as $tamanho) {
                 $quantidadeEla = Inscricao::where('paroquia_id', $paroquia->id)
-                    ->whereIn('status_pagamento', ['Pago', 'Cortesia'])
+                    ->whereIn('status_pagamento', ['Pago', 'Cortesia', 'Pendente'])
                     ->where('tamanho_camisa_ela', $tamanho)
                     ->count();
 
                 $quantidadeEle = Inscricao::where('paroquia_id', $paroquia->id)
-                    ->whereIn('status_pagamento', ['Pago', 'Cortesia'])
+                    ->whereIn('status_pagamento', ['Pago', 'Cortesia', 'Pendente'])
                     ->where('tamanho_camisa_ele', $tamanho)
                     ->count();
 
