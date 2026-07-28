@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             ParoquiaSeeder::class,
+            SettingsSeeder::class,
         ]);
 
         User::factory()->create([

@@ -38,14 +38,11 @@
         </h1>
 
         @php
-            $hoje = strtotime(now());
-            $dataLimite = DateTime::createFromFormat('d/m/Y', '25/07/2026')->getTimestamp();
-
             $totalPago = \App\Models\Inscricao::where('status_pagamento','Pago')->count();
-           // dd($totalPago);
+            $inscricoesAbertas = \App\Models\Settings::inscricoesAbertas();
         @endphp
 
-        @if($totalPago >= '1000' OR $hoje > $dataLimite)
+        @if(!$inscricoesAbertas)
 
             <div class="py-6">
                 <h2 class="text-2xl font-bold text-red-600 mb-4">
@@ -65,9 +62,17 @@
 
         @else
 
+            @php
+                $dataLimite = \App\Models\Settings::instance()->data_limite;
+            @endphp
+
             <p class="text-md text-gray-700 mb-2">
                 O evento tem apenas 1000 vagas disponíveis.<br>
-                As inscrições serão encerradas em 25/07/2026 ou assim que o limite for atingido.<br>
+                @if($dataLimite)
+                    As inscrições serão encerradas em {{ $dataLimite->format('d/m/Y') }} ou assim que o limite for atingido.<br>
+                @else
+                    As inscrições serão encerradas assim que o limite for atingido.<br>
+                @endif
                 Garanta sua vaga o quanto antes! Há {{ $totalPago }} inscrições confirmadas.
             </p>
 
