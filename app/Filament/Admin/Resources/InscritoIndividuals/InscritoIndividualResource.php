@@ -78,7 +78,7 @@ class InscritoIndividualResource extends Resource
                     ->formatStateUsing(fn ($record) => "{$record->paroquia->name} - {$record->paroquia->city}"),
                 BadgeColumn::make('invoice.status')
                     ->label('Status do Pagamento')
-                    ->getStateUsing(fn ($record) => $record->invoice?->status ?? 'sem_invoice')
+                    ->getStateUsing(fn ($record) => $record->invoice?->status ?? $record->status_pagamento)
                     ->colors([
                         'success' => 'Pago',
                         'warning' => 'Cortesia',
