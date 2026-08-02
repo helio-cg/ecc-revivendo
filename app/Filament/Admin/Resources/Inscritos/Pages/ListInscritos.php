@@ -107,8 +107,7 @@ class ListInscritos extends ListRecords
     {
         $inscricoes = Inscricao::where('status_pagamento', 'Pago')
             ->with('paroquia')
-            ->orderBy('paroquia_id')
-            ->orderBy('nome_ele')
+            ->inRandomOrder()
             ->get();
 
         $titulo = 'XXIII Revivendo';

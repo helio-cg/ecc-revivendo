@@ -36,8 +36,8 @@
         }
 
         .ticket .num {
-            width: 70px;
-            font-size: 26px;
+            width: 60px;
+            font-size: 22px;
             font-weight: bold;
             text-align: center;
             vertical-align: middle;
@@ -48,7 +48,7 @@
         }
 
         .ticket .nome {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: bold;
             color: #2c3e50;
             padding: 4px 10px;
@@ -56,7 +56,7 @@
         }
 
         .ticket .paroquia {
-            font-size: 13px;
+            font-size: 12px;
             color: #555;
             padding: 4px 10px;
         }
