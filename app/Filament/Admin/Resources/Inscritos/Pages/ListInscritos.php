@@ -33,6 +33,12 @@ class ListInscritos extends ListRecords
                 ->icon('heroicon-o-document-text')
                 ->color('primary')
                 ->action(fn (array $data) => static::gerarPdfGeral()),
+            Action::make('Sorteio')
+                ->label('Sorteio PDF')
+                ->icon('heroicon-o-gift')
+                ->color('warning')
+                ->requiresConfirmation()
+                ->action(fn () => static::gerarPdfSorteio()),
             Action::make('Gerar PDF')
                 ->label('Gerar PDF')
                 ->icon('heroicon-o-check-circle')
@@ -94,6 +100,25 @@ class ListInscritos extends ListRecords
         return response()->streamDownload(
             fn () => print($pdf->output()),
             "inscricoes_{$paroquia->name}_{$paroquia->city}.pdf"
+        );
+    }
+
+    public static function gerarPdfSorteio()
+    {
+        $inscricoes = Inscricao::where('status_pagamento', 'Pago')
+            ->with('paroquia')
+            ->orderBy('paroquia_id')
+            ->orderBy('nome_ele')
+            ->get();
+
+        $titulo = 'XXIII Revivendo';
+
+        $pdf = Pdf::loadView('pdf.sorteio', compact('inscricoes', 'titulo'))
+            ->setPaper('a4', 'portrait');
+
+        return response()->streamDownload(
+            fn () => print($pdf->output()),
+            'sorteio_casais_pagos.pdf'
         );
     }
 
